@@ -301,6 +301,15 @@
     display:block;
     margin-bottom:16px;
   }
+  .specialty-icon{
+    width:46px; height:46px; margin-bottom:18px;
+    display:grid; place-items:center;
+    border-radius:14px;
+    color:var(--mint);
+    background:rgba(76,174,205,.12);
+    border:1px solid rgba(76,174,205,.28);
+  }
+  .specialty-icon svg{width:27px; height:27px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
   .tooth-card h3{
     font-size:1.05rem;
     font-weight:600;
@@ -347,19 +356,22 @@
   .why-item:hover,.why-item.active{background:rgba(47,174,131,.08); padding-left:14px; padding-right:14px;}
   .why-item:focus-visible{outline:2px solid var(--mint-dark); outline-offset:3px;}
   .why-item:first-child{padding-top:0;}
-  .why-item .mono{color:var(--coral);}
+  .why-item .mono{color:var(--coral); font-size:1.55rem; font-weight:600; line-height:1;}
   .why-item h3{font-size:1.15rem; margin-bottom:8px;}
   .why-item p{color:#4a4a4a; font-size:0.95rem; max-width:52ch;}
 
   /* ---------- SEDES ---------- */
+  #sedes{background:var(--ink); color:var(--paper);}
+  #sedes .section-head .mono{color:var(--mint);}
+  #sedes .section-head p{color:#bdbdbd;}
   .sedes-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:24px;
   }
   .sede-card{
-    background:var(--white);
-    border:1px solid var(--sand);
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.16);
     border-radius:var(--radius);
     overflow:hidden;
   }
@@ -370,13 +382,13 @@
     display:block;
   }
   .sede-body{padding:22px 24px 26px;}
-  .sede-body .mono{color:var(--mint-dark); display:block; margin-bottom:8px;}
+  .sede-body .mono{color:var(--mint); display:block; margin-bottom:8px;}
   .sede-body h3{font-size:1.15rem; margin-bottom:8px;}
-  .sede-body p{font-size:0.92rem; color:#4a4a4a; margin-bottom:14px;}
+  .sede-body p{font-size:0.92rem; color:#d0d0d0; margin-bottom:14px;}
   .sede-body a.link-out{
     font-size:0.85rem;
     font-weight:600;
-    color:var(--mint-dark);
+    color:var(--mint);
     display:inline-flex;
     align-items:center;
     gap:6px;
@@ -388,25 +400,32 @@
 
   /* ---------- EQUIPO ---------- */
   #equipo .section-head{margin-bottom:42px;}
+  .team-carousel{position:relative; padding:0 48px;}
   .team-scroll{
     display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
     gap:20px;
     align-items:stretch;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding:4px 2px 18px;
   }
+  .team-scroll::-webkit-scrollbar{display:none;}
   .doc-card{
     min-width:0;
-    flex:1 1 205px;
-    max-width:260px;
+    flex:0 0 calc((100% - 60px) / 4);
     display:flex;
     flex-direction:column;
-    background:var(--white);
+    background:rgba(18,18,18,.88);
     border-radius:var(--radius);
     overflow:hidden;
-    border:1px solid var(--sand);
+    border:1px solid rgba(255,255,255,.12);
+    scroll-snap-align:start;
+    box-shadow:0 12px 30px rgba(18,18,18,.1);
   }
   .doc-photo{
+    position:relative;
     aspect-ratio:1.12 / 1;
     min-height:190px;
     background:linear-gradient(150deg, var(--mint) 0%, var(--mint-dark) 100%);
@@ -422,13 +441,17 @@
     object-position:top center;
   }
   .doc-photo svg{width:64px; height:64px; opacity:0.9;}
-  .doc-info{padding:18px 18px 22px; display:flex; flex-direction:column; flex:1;}
-  .doc-info h3{font-size:1.02rem; line-height:1.25; margin-bottom:5px; overflow-wrap:anywhere;}
-  .doc-info .role{color:var(--mint-dark); font-size:0.8rem; line-height:1.35; font-weight:600; margin-bottom:12px; display:block; min-height:2.2em;}
-  .doc-info .mono{color:#8a8a8a; font-size:0.68rem;}
-  .doc-info .chief-badge{
+  .doc-info{padding:18px 18px 22px; display:flex; flex-direction:column; flex:1; color:var(--white);}
+  .doc-info h3{color:var(--white); font-size:1.02rem; line-height:1.25; margin-bottom:5px; overflow-wrap:anywhere;}
+  .doc-info .role{color:var(--mint); font-size:0.8rem; line-height:1.35; font-weight:600; margin-bottom:12px; display:block; min-height:2.2em;}
+  .doc-info .mono{color:var(--white); font-size:0.68rem; margin-top:auto;}
+  .doc-photo .chief-badge{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    z-index:2;
     display:inline-block;
-    background:var(--ink);
+    background:rgba(18,18,18,.88);
     color:var(--white);
     font-family:'IBM Plex Mono', monospace;
     font-size:0.62rem;
@@ -436,18 +459,28 @@
     letter-spacing:0.06em;
     padding:3px 8px;
     border-radius:999px;
-    margin-bottom:8px;
-    align-self:flex-start;
+    box-shadow:0 4px 14px rgba(0,0,0,.25);
   }
+  .team-btn{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    width:40px; height:40px; border:0; border-radius:50%;
+    background:var(--ink); color:var(--white); font-size:1.3rem;
+    cursor:pointer; box-shadow:0 8px 20px rgba(18,18,18,.2);
+  }
+  .team-btn:hover{background:var(--mint-dark);}
+  .team-btn.prev{left:0;}
+  .team-btn.next{right:0;}
   @media (max-width:700px){
     #equipo .section-head{margin-bottom:32px;}
+    .team-carousel{padding:0 40px;}
     .team-scroll{gap:14px;}
-    .doc-card{flex-basis:calc(50% - 7px); max-width:none;}
+    .doc-card{flex-basis:min(78vw,280px);}
     .doc-photo{min-height:150px;}
     .doc-info{padding:15px;}
   }
   @media (max-width:440px){
-    .doc-card{flex-basis:100%; max-width:340px; width:100%; margin:0 auto;}
+    .team-carousel{padding:0 34px;}
+    .doc-card{flex-basis:100%;}
     .doc-photo{aspect-ratio:4 / 3;}
   }
 
@@ -653,13 +686,13 @@
       <div class="specialty-carousel" aria-label="Carrusel de especialidades">
         <button class="carousel-btn prev" type="button" aria-label="Especialidad anterior">&#8249;</button>
         <div class="arc-row" id="specialty-track">
-          <button class="tooth-card active" type="button" data-name="Cirugía" data-image="assets/especialidad-cirugia.png" data-alt="Atención de cirugía oral en Odontomark"><span class="num">01</span><h3>Cirugía</h3><p>Realizamos procedimientos quirúrgicos orales con evaluación previa, planificación cuidadosa y seguimiento cercano.</p></button>
-          <button class="tooth-card" type="button" data-name="Cirugía maxilofacial" data-image="assets/especialidad-maxilofacial.png" data-alt="Consulta de cirugía maxilofacial en Odontomark"><span class="num">02</span><h3>Cirugía maxilofacial</h3><p>Evaluamos y tratamos alteraciones de los maxilares, el rostro y la función oral con un enfoque especializado.</p></button>
-          <button class="tooth-card" type="button" data-name="Prostodoncia" data-image="assets/especialidad-prostodoncia.png" data-alt="Consulta de prostodoncia en Odontomark"><span class="num">03</span><h3>Prostodoncia</h3><p>Rehabilitamos dientes ausentes o dañados para recuperar función, comodidad y una apariencia natural.</p></button>
-          <button class="tooth-card" type="button" data-name="Endodoncia" data-image="assets/especialidad-endodoncia.png" data-alt="Tratamiento de endodoncia en Odontomark"><span class="num">04</span><h3>Endodoncia</h3><p>Tratamos el interior del diente para aliviar molestias, controlar infecciones y conservar la pieza dental.</p></button>
-          <button class="tooth-card" type="button" data-name="Implantología"><span class="num">05</span><h3>Implantología</h3><p>Reemplazamos piezas perdidas mediante implantes planificados para recuperar estabilidad, función y una apariencia natural.</p></button>
-          <button class="tooth-card" type="button" data-name="Diseño de sonrisa"><span class="num">06</span><h3>Diseño de sonrisa</h3><p>Analizamos forma, color y proporción dental para diseñar una sonrisa armónica y acorde con tus objetivos.</p></button>
-          <button class="tooth-card" type="button" data-name="Ortodoncia"><span class="num">07</span><h3>Ortodoncia</h3><p>Corregimos la posición de los dientes y la mordida mediante alternativas adaptadas a cada paciente.</p></button>
+          <button class="tooth-card active" type="button" data-name="Cirugía" data-image="assets/especialidad-cirugia.png" data-alt="Atención de cirugía oral en Odontomark"><span class="num">01</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25 23 9m-3-3 6 6M6 26l5-1-4-4-1 5Z"/></svg></span><h3>Cirugía</h3><p>Realizamos procedimientos quirúrgicos orales con evaluación previa, planificación cuidadosa y seguimiento cercano.</p></button>
+          <button class="tooth-card" type="button" data-name="Cirugía maxilofacial" data-image="assets/especialidad-maxilofacial.png" data-alt="Consulta de cirugía maxilofacial en Odontomark"><span class="num">02</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 5c-3 2-5 6-5 10 0 7 5 12 12 12 4 0 7-2 9-5M10 18c4 3 9 3 13 0M21 8c2 1 4 3 5 6m-9-4v7m-3-3h6"/></svg></span><h3>Cirugía maxilofacial</h3><p>Evaluamos y tratamos alteraciones de los maxilares, el rostro y la función oral con un enfoque especializado.</p></button>
+          <button class="tooth-card" type="button" data-name="Prostodoncia" data-image="assets/especialidad-prostodoncia.png" data-alt="Consulta de prostodoncia en Odontomark"><span class="num">03</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 18c3-5 7-7 11-7s8 2 11 7M6 18c2 6 5 8 10 8s8-2 10-8M10 15v8m6-10v12m6-10v8"/></svg></span><h3>Prostodoncia</h3><p>Rehabilitamos dientes ausentes o dañados para recuperar función, comodidad y una apariencia natural.</p></button>
+          <button class="tooth-card" type="button" data-name="Endodoncia" data-image="assets/especialidad-endodoncia.png" data-alt="Tratamiento de endodoncia en Odontomark"><span class="num">04</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 5c-3 2-2 8 0 12 2 4 2 10 5 10 2 0 1-7 3-7s1 7 3 7c3 0 3-6 5-10 2-4 3-10 0-12-3-2-5 1-8 1S12 3 9 5Z"/><path d="M17 8v9m-3-3 3 3 3-3"/></svg></span><h3>Endodoncia</h3><p>Tratamos el interior del diente para aliviar molestias, controlar infecciones y conservar la pieza dental.</p></button>
+          <button class="tooth-card" type="button" data-name="Implantología"><span class="num">05</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6h10l-1 5h-8l-1-5Zm2 5v13l3 3 3-3V11m-6 4h6m-6 4h6m-6 4h6"/></svg></span><h3>Implantología</h3><p>Reemplazamos piezas perdidas mediante implantes planificados para recuperar estabilidad, función y una apariencia natural.</p></button>
+          <button class="tooth-card" type="button" data-name="Diseño de sonrisa"><span class="num">06</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 17c3 6 7 9 12 9s8-3 10-7M8 10c5 4 10 4 15 0M23 4v6m-3-3h6M7 5v4M5 7h4"/></svg></span><h3>Diseño de sonrisa</h3><p>Analizamos forma, color y proporción dental para diseñar una sonrisa armónica y acorde con tus objetivos.</p></button>
+          <button class="tooth-card" type="button" data-name="Ortodoncia"><span class="num">07</span><span class="specialty-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 11c7-5 15-5 22 0M5 21c7 5 15 5 22 0M8 9v14m5-17v20m6-20v20m5-17v14M5 16h22"/><path d="M11 14h4v4h-4zm8 0h4v4h-4z"/></svg></span><h3>Ortodoncia</h3><p>Corregimos la posición de los dientes y la mordida mediante alternativas adaptadas a cada paciente.</p></button>
         </div>
         <button class="carousel-btn next" type="button" aria-label="Siguiente especialidad">&#8250;</button>
       </div>
@@ -742,10 +775,12 @@
         <h2>Especialistas colegiados, no practicantes.</h2>
         <p>Profesionales comprometidos con una atención cercana, coordinada y especializada en cada etapa de tu tratamiento.</p>
       </div>
-      <div class="team-scroll">
+      <div class="team-carousel" aria-label="Carrusel de especialistas">
+        <button class="team-btn prev" type="button" aria-label="Especialista anterior">&#8249;</button>
+        <div class="team-scroll" id="team-track">
         <div class="doc-card">
-          <div class="doc-photo"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg></div>
-          <div class="doc-info"><span class="chief-badge">Jefe</span><h3>Dr. Ronald Siancas</h3><span class="role">Diseño de Sonrisa</span><span class="mono">COP 00000 · RNE 00000</span></div>
+          <div class="doc-photo"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg><span class="chief-badge">Jefe</span></div>
+          <div class="doc-info"><h3>Dr. Ronald Siancas</h3><span class="role">Diseño de Sonrisa</span><span class="mono">COP 00000 · RNE 00000</span></div>
         </div>
         <div class="doc-card">
           <div class="doc-photo"><img src="assets/henry.png" alt="Dr. Henry Muller"></div>
@@ -763,6 +798,8 @@
           <div class="doc-photo"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg></div>
           <div class="doc-info"><h3>Dra. [Nombre]</h3><span class="role">Estética dental</span><span class="mono">COP 00000 · RNE 00000</span></div>
         </div>
+        </div>
+        <button class="team-btn next" type="button" aria-label="Siguiente especialista">&#8250;</button>
       </div>
     </div>
   </section>
@@ -956,6 +993,16 @@
       }
     });
   });
+
+  const teamTrack = document.getElementById('team-track');
+  const teamStep = direction => {
+    const card = teamTrack.querySelector('.doc-card');
+    if(!card) return;
+    const gap = parseFloat(getComputedStyle(teamTrack).gap) || 0;
+    teamTrack.scrollBy({left:direction * (card.offsetWidth + gap), behavior:'smooth'});
+  };
+  document.querySelector('.team-btn.prev').addEventListener('click', () => teamStep(-1));
+  document.querySelector('.team-btn.next').addEventListener('click', () => teamStep(1));
 
   function enviarWhatsApp(e){
     e.preventDefault();

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odontomark — Odontología de precisión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#121212;
+    --paper:#FFFFFF;
+    --paper-2:#F3F3F3;
+    --mint:#4CAECD;
+    --mint-dark:#1F7A96;
+    --coral:#1F7A96;
+    --coral-dark:#121212;
+    --sand:#E3E3E3;
+    --white:#FFFFFF;
+    --radius:18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(20px,4vw,48px);
+  }
+  :focus-visible{
+    outline:3px solid var(--coral);
+    outline-offset:3px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding:18px 0;
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  header.scrolled{
+    background:rgba(246,244,237,0.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 rgba(11,43,38,0.08);
+    padding:12px 0;
+  }
+  header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--ink);
+  }
+  .logo-img{
+    height:44px;
+    width:auto;
+    display:block;
+  }
+  .logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.15;
+  }
+  .logo-text .eyebrow-word{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.6rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--mint-dark);
+  }
+  .logo-text strong{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:1.2rem;
+    letter-spacing:-0.01em;
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:32px;
+  }
+  nav a{
+    font-size:0.95rem;
+    font-weight:500;
+    position:relative;
+    padding-bottom:4px;
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0; height:2px;
+    background:var(--mint);
+    transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:12px 22px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:0.92rem;
+    border:1px solid var(--ink);
+    cursor:pointer;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{
+    background:var(--mint-dark);
+    border-color:var(--mint-dark);
+    transform:translateY(-2px);
+  }
+  .btn.ghost{
+    background:transparent;
+    color:var(--ink);
+  }
+  .btn.ghost:hover{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:170px 0 110px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--mint-dark);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1.5px;
+    background:var(--mint-dark);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5vw, 4.2rem);
+    max-width:11ch;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--mint-dark);
+  }
+  .hero p.lead{
+    margin-top:22px;
+    font-size:1.15rem;
+    max-width:46ch;
+    color:#333333;
+  }
+  .hero-ctas{
+    margin-top:34px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .hero-stats{
+    display:flex;
+    gap:36px;
+    margin-top:52px;
+  }
+  .hero-stats div strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:1.9rem;
+    color:var(--ink);
+  }
+  .hero-stats div span{
+    font-size:0.82rem;
+    color:#6b6b6b;
+  }
+
+  /* Smile-arc signature graphic */
+  .arc-graphic{
+    position:relative;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .arc-graphic svg{width:100%; height:100%;}
+  .arc-graphic .float-card{
+    position:absolute;
+    background:var(--white);
+    border-radius:14px;
+    padding:12px 16px;
+    box-shadow:0 14px 30px rgba(11,43,38,0.12);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .float-card .dot{width:8px;height:8px;border-radius:50%;background:var(--mint);}
+  .float-card.c1{top:6%; left:2%;}
+  .float-card.c2{bottom:10%; right:0%;}
+  @keyframes drift{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  .float-card.c1{animation:drift 6s ease-in-out infinite;}
+  .float-card.c2{animation:drift 7s ease-in-out infinite 1s;}
+
+  /* ---------- SECTION HEADS ---------- */
+  section{padding:104px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:64px;
+  }
+  .section-head .mono{color:var(--mint-dark); display:block; margin-bottom:14px;}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem);}
+  .section-head p{margin-top:16px; color:#4a4a4a; font-size:1.02rem;}
+
+  /* ---------- ESPECIALIDADES (arc layout) ---------- */
+  .specialties{background:var(--ink); color:var(--paper);}
+  .specialties .section-head p{color:#b3b3b3;}
+  .specialties .section-head .mono{color:var(--mint);}
+  .specialty-carousel{position:relative; padding:0 48px;}
+  .arc-row{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding:12px 4px 28px;
+  }
+  .arc-row::-webkit-scrollbar{display:none;}
+  .tooth-card{
+    flex:0 0 calc((100% - 32px) / 3);
+    min-width:240px;
+    background:rgba(246,244,237,0.06);
+    border:1px solid rgba(246,244,237,0.14);
+    border-radius:var(--radius);
+    padding:26px 18px 22px;
+    transition:transform .3s ease, background .3s ease, border-color .3s ease;
+    cursor:pointer;
+    color:inherit;
+    text-align:left;
+    scroll-snap-align:start;
+  }
+  .tooth-card:hover,.tooth-card.active{
+    background:rgba(47,174,131,0.16);
+    border-color:var(--mint);
+    transform:translateY(-6px);
+  }
+  .carousel-btn{
+    position:absolute; top:50%; transform:translateY(-60%); z-index:2;
+    width:38px; height:38px; border:1px solid rgba(246,244,237,.3);
+    border-radius:50%; background:var(--ink); color:var(--paper);
+    font-size:1.25rem; cursor:pointer;
+  }
+  .carousel-btn:hover{background:var(--mint-dark);}
+  .carousel-btn.prev{left:0;}
+  .carousel-btn.next{right:0;}
+  .tooth-card .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--mint);
+    display:block;
+    margin-bottom:16px;
+  }
+  .tooth-card h3{
+    font-size:1.05rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .tooth-card p{
+    font-size:0.86rem;
+    color:#c9c9c9;
+  }
+
+  /* ---------- POR QUÉ ODONTOMARK ---------- */
+  .why .wrap{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:60px;
+  }
+  .why-visual{
+    background:var(--paper-2);
+    border-radius:24px;
+    overflow:hidden;
+    position:relative;
+    min-height:380px;
+  }
+  .why-visual img{transition:opacity .25s ease;}
+  .why-visual img.changing{opacity:.2;}
+  .why-visual-caption{
+    position:absolute; left:20px; right:20px; bottom:20px;
+    padding:14px 16px; border-radius:12px;
+    color:var(--white); background:rgba(28,28,28,.76);
+    backdrop-filter:blur(8px);
+  }
+  .why-visual-caption strong{display:block; margin-bottom:3px;}
+  .why-visual-caption span{font-size:.84rem; color:#ddd;}
+  .why-list{display:flex; flex-direction:column; gap:0;}
+  .why-item{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:20px;
+    padding:26px 0;
+    border-bottom:1px solid var(--sand);
+    cursor:pointer;
+    transition:background .25s ease, padding .25s ease;
+  }
+  .why-item:hover,.why-item.active{background:rgba(47,174,131,.08); padding-left:14px; padding-right:14px;}
+  .why-item:focus-visible{outline:2px solid var(--mint-dark); outline-offset:3px;}
+  .why-item:first-child{padding-top:0;}
+  .why-item .mono{color:var(--coral);}
+  .why-item h3{font-size:1.15rem; margin-bottom:8px;}
+  .why-item p{color:#4a4a4a; font-size:0.95rem; max-width:52ch;}
+
+  /* ---------- SEDES ---------- */
+  .sedes-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .sede-card{
+    background:var(--white);
+    border:1px solid var(--sand);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .sede-map{
+    width:100%;
+    height:260px;
+    border:0;
+    display:block;
+  }
+  .sede-body{padding:22px 24px 26px;}
+  .sede-body .mono{color:var(--mint-dark); display:block; margin-bottom:8px;}
+  .sede-body h3{font-size:1.15rem; margin-bottom:8px;}
+  .sede-body p{font-size:0.92rem; color:#4a4a4a; margin-bottom:14px;}
+  .sede-body a.link-out{
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--mint-dark);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .sede-body a.link-out:hover{text-decoration:underline;}
+  @media (max-width:900px){
+    .sedes-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- EQUIPO ---------- */
+  #equipo .section-head{margin-bottom:42px;}
+  .team-scroll{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    align-items:stretch;
+  }
+  .doc-card{
+    min-width:0;
+    flex:1 1 205px;
+    max-width:260px;
+    display:flex;
+    flex-direction:column;
+    background:var(--white);
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--sand);
+  }
+  .doc-photo{
+    aspect-ratio:1.12 / 1;
+    min-height:190px;
+    background:linear-gradient(150deg, var(--mint) 0%, var(--mint-dark) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .doc-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:top center;
+  }
+  .doc-photo svg{width:64px; height:64px; opacity:0.9;}
+  .doc-info{padding:18px 18px 22px; display:flex; flex-direction:column; flex:1;}
+  .doc-info h3{font-size:1.02rem; line-height:1.25; margin-bottom:5px; overflow-wrap:anywhere;}
+  .doc-info .role{color:var(--mint-dark); font-size:0.8rem; line-height:1.35; font-weight:600; margin-bottom:12px; display:block; min-height:2.2em;}
+  .doc-info .mono{color:#8a8a8a; font-size:0.68rem;}
+  .doc-info .chief-badge{
+    display:inline-block;
+    background:var(--ink);
+    color:var(--white);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    padding:3px 8px;
+    border-radius:999px;
+    margin-bottom:8px;
+    align-self:flex-start;
+  }
+  @media (max-width:700px){
+    #equipo .section-head{margin-bottom:32px;}
+    .team-scroll{gap:14px;}
+    .doc-card{flex-basis:calc(50% - 7px); max-width:none;}
+    .doc-photo{min-height:150px;}
+    .doc-info{padding:15px;}
+  }
+  @media (max-width:440px){
+    .doc-card{flex-basis:100%; max-width:340px; width:100%; margin:0 auto;}
+    .doc-photo{aspect-ratio:4 / 3;}
+  }
+
+  /* ---------- TESTIMONIOS ---------- */
+  .testimonials{background:var(--paper-2);}
+  .t-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .t-card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:28px;
+    border:1px solid var(--sand);
+  }
+  .t-card .stars{color:var(--coral); letter-spacing:2px; margin-bottom:14px; font-size:0.95rem;}
+  .t-card p{font-size:0.95rem; color:#333333; margin-bottom:18px;}
+  .t-card .who{display:flex; align-items:center; gap:10px;}
+  .t-avatar{
+    width:36px; height:36px; border-radius:50%;
+    background:var(--mint);
+    color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; font-size:0.9rem;
+  }
+  .who strong{font-size:0.88rem; display:block;}
+  .who span{font-size:0.76rem; color:#8a8a8a;}
+
+  /* ---------- CONTACTO ---------- */
+  .contact{background:var(--ink); color:var(--paper);}
+  .contact .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  .contact h2{color:var(--paper); font-size:clamp(1.9rem,3.4vw,2.6rem); max-width:14ch;}
+  .contact p.lead{color:#b3b3b3; margin-top:18px; max-width:44ch;}
+  .info-list{margin-top:36px; display:flex; flex-direction:column; gap:22px;}
+  .info-item{display:flex; gap:16px; align-items:flex-start;}
+  .info-item .ico{
+    width:38px;height:38px;border-radius:10px;
+    background:rgba(47,174,131,0.18);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .info-item h4{font-size:0.95rem; margin-bottom:3px;}
+  .info-item p{font-size:0.86rem; color:#b3b3b3;}
+  .pay-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:30px;}
+  .pay-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    border:1px solid rgba(246,244,237,0.28);
+    padding:7px 12px;
+    border-radius:999px;
+    color:#e5e5e5;
+  }
+  .form-card{
+    background:var(--paper);
+    color:var(--ink);
+    border-radius:24px;
+    padding:36px;
+  }
+  .form-card h3{font-size:1.2rem; margin-bottom:6px;}
+  .form-card p{font-size:0.88rem; color:#4a4a4a; margin-bottom:24px;}
+  .form-card label{
+    display:block; font-size:0.78rem; font-weight:600;
+    margin-bottom:6px; margin-top:16px;
+  }
+  .form-card label:first-of-type{margin-top:0;}
+  .form-card input, .form-card select, .form-card textarea{
+    width:100%;
+    border:1px solid var(--sand);
+    background:var(--white);
+    border-radius:10px;
+    padding:11px 14px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+  .form-card input:focus, .form-card select:focus, .form-card textarea:focus{
+    outline:2px solid var(--mint);
+    border-color:var(--mint);
+  }
+  .form-card .btn{width:100%; justify-content:center; margin-top:24px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:32px 0; background:var(--ink);}
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid rgba(246,244,237,0.14);
+    padding-top:28px;
+    color:#9a9a9a;
+    font-size:0.82rem;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  footer .foot-links{display:flex; gap:22px;}
+  footer a:hover{color:var(--paper);}
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed;
+    bottom:24px; right:24px;
+    z-index:200;
+    width:58px; height:58px;
+    border-radius:50%;
+    background:var(--mint);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px rgba(47,174,131,0.4);
+    transition:transform .2s ease;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    nav ul{display:none;}
+    .nav-toggle{
+      display:flex; background:none; border:none; cursor:pointer;
+      flex-direction:column; gap:5px;
+    }
+    .nav-toggle span{width:22px; height:2px; background:var(--ink);}
+    .hero .wrap{grid-template-columns:1fr;}
+    .arc-graphic{max-width:380px; margin:0 auto;}
+    .specialty-carousel{padding:0 42px;}
+    .tooth-card{flex-basis:min(82vw,320px); min-width:0;}
+    .tooth-card{transform:none !important;}
+    .why .wrap{grid-template-columns:1fr;}
+    .t-grid{grid-template-columns:1fr;}
+    .contact .wrap{grid-template-columns:1fr;}
+    .hero-stats{gap:24px; flex-wrap:wrap;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap">
+    <a href="#top" class="logo">
+      <img src="assets/logo-odontomark.png" alt="Odontomark" class="logo-img">
+      <span class="logo-text"><span class="eyebrow-word">Clínica Dental</span><strong>Odontomark</strong></span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#especialidades">Especialidades</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#sedes">Sedes</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="btn wa-link" href="https://wa.me/51902956428" target="_blank" rel="noopener">Agendar cita</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow mono">Clínica dental · Lima, Perú</span>
+        <h1>Cada sonrisa se <em>diseña</em> con precisión, no con suerte.</h1>
+        <p class="lead">En Odontomark partimos del diseño de tu sonrisa: definimos cómo quieres verte y armamos el plan de tratamiento alrededor de ese resultado, con especialistas certificados en cada etapa.</p>
+        <div class="hero-ctas">
+          <a class="btn wa-link" href="https://wa.me/51902956428" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+          <a class="btn ghost" href="#especialidades">Ver especialidades</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>12+</strong><span>años de experiencia</span></div>
+        </div>
+      </div>
+      <div class="arc-graphic">
+        <svg viewBox="0 0 400 400" fill="none">
+          <path d="M60 180 Q200 320 340 180" stroke="#121212" stroke-width="2" stroke-dasharray="2 8" opacity="0.2"/>
+          <path d="M80 170 Q200 280 320 170" stroke="#4CAECD" stroke-width="3" fill="none"/>
+          <g>
+            <circle cx="80" cy="170" r="20" fill="#121212"/>
+            <circle cx="132" cy="215" r="22" fill="#4CAECD"/>
+            <circle cx="188" cy="238" r="24" fill="#121212"/>
+            <circle cx="248" cy="234" r="24" fill="#121212"/>
+            <circle cx="300" cy="205" r="22" fill="#4CAECD"/>
+            <circle cx="320" cy="170" r="20" fill="#121212"/>
+          </g>
+        </svg>
+        <div class="float-card c1"><span class="dot"></span>Diseño de sonrisa a tu medida</div>
+        <div class="float-card c2"><span class="dot"></span>Varios especialistas, un solo equipo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section id="especialidades" class="specialties">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">Especialidades</span>
+        <h2>Siete especialidades, un solo equipo.</h2>
+        <p>Selecciona una especialidad para conocerla y ver cómo trabajamos. El carrusel avanza automáticamente.</p>
+      </div>
+      <div class="specialty-carousel" aria-label="Carrusel de especialidades">
+        <button class="carousel-btn prev" type="button" aria-label="Especialidad anterior">&#8249;</button>
+        <div class="arc-row" id="specialty-track">
+          <button class="tooth-card active" type="button" data-name="Cirugía" data-image="assets/especialidad-cirugia.png" data-alt="Atención de cirugía oral en Odontomark"><span class="num">01</span><h3>Cirugía</h3><p>Realizamos procedimientos quirúrgicos orales con evaluación previa, planificación cuidadosa y seguimiento cercano.</p></button>
+          <button class="tooth-card" type="button" data-name="Cirugía maxilofacial" data-image="assets/especialidad-maxilofacial.png" data-alt="Consulta de cirugía maxilofacial en Odontomark"><span class="num">02</span><h3>Cirugía maxilofacial</h3><p>Evaluamos y tratamos alteraciones de los maxilares, el rostro y la función oral con un enfoque especializado.</p></button>
+          <button class="tooth-card" type="button" data-name="Prostodoncia" data-image="assets/especialidad-prostodoncia.png" data-alt="Consulta de prostodoncia en Odontomark"><span class="num">03</span><h3>Prostodoncia</h3><p>Rehabilitamos dientes ausentes o dañados para recuperar función, comodidad y una apariencia natural.</p></button>
+          <button class="tooth-card" type="button" data-name="Endodoncia" data-image="assets/especialidad-endodoncia.png" data-alt="Tratamiento de endodoncia en Odontomark"><span class="num">04</span><h3>Endodoncia</h3><p>Tratamos el interior del diente para aliviar molestias, controlar infecciones y conservar la pieza dental.</p></button>
+          <button class="tooth-card" type="button" data-name="Implantología"><span class="num">05</span><h3>Implantología</h3><p>Reemplazamos piezas perdidas mediante implantes planificados para recuperar estabilidad, función y una apariencia natural.</p></button>
+          <button class="tooth-card" type="button" data-name="Diseño de sonrisa"><span class="num">06</span><h3>Diseño de sonrisa</h3><p>Analizamos forma, color y proporción dental para diseñar una sonrisa armónica y acorde con tus objetivos.</p></button>
+          <button class="tooth-card" type="button" data-name="Ortodoncia"><span class="num">07</span><h3>Ortodoncia</h3><p>Corregimos la posición de los dientes y la mordida mediante alternativas adaptadas a cada paciente.</p></button>
+        </div>
+        <button class="carousel-btn next" type="button" aria-label="Siguiente especialidad">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ODONTOMARK -->
+  <section id="nosotros" class="why">
+    <div class="wrap">
+      <div class="why-visual">
+        <img id="about-value-image" src="assets/valor-escuchamos.png" alt="Odontóloga escuchando atentamente a una paciente" style="width:100%;height:100%;min-height:520px;object-fit:cover;border-radius:14px;">
+        <div class="why-visual-caption"><strong id="about-value-name">Te escuchamos primero</strong><span>Selecciona uno de nuestros valores para cambiar esta imagen</span></div>
+      </div>
+      <div>
+        <div class="section-head">
+          <span class="mono">Nuestra filosofía de atención</span>
+          <h2>Una sonrisa puede ser el comienzo de un gran cambio.</h2>
+          <p>Antes de hablar de un tratamiento, nos tomamos el tiempo para escucharte: queremos conocer tu historia, comprender qué te preocupa y saber qué significa para ti volver a sonreír.</p>
+        </div>
+        <div class="why-list">
+          <div class="why-item active" tabindex="0" role="button" data-name="Te escuchamos primero" data-image="assets/valor-escuchamos.png" data-alt="Odontóloga escuchando atentamente a una paciente">
+            <span class="mono">A</span>
+            <div><h3>Te escuchamos primero</h3><p>Escuchamos tus opiniones, resolvemos tus dudas y diseñamos un tratamiento de acuerdo con tus necesidades y objetivos.</p></div>
+          </div>
+          <div class="why-item" tabindex="0" role="button" data-name="Tratamos personas, no solo dientes" data-image="assets/valor-personas.png" data-alt="Odontóloga recibiendo con calidez a una paciente">
+            <span class="mono">B</span>
+            <div><h3>Tratamos personas, no solo dientes</h3><p>Entendemos que muchas personas llegan porque dejaron de sonreír, evitan las fotografías o perdieron confianza en sí mismas.</p></div>
+          </div>
+          <div class="why-item" tabindex="0" role="button" data-name="Recuperar confianza" data-image="assets/valor-confianza.png" data-alt="Paciente recuperando la confianza en su sonrisa">
+            <span class="mono">C</span>
+            <div><h3>Recuperar confianza</h3><p>Nuestro propósito es ayudarte a sonreír, hablar, comer y relacionarte con mayor seguridad, favoreciendo tu bienestar cotidiano.</p></div>
+          </div>
+          <div class="why-item" tabindex="0" role="button" data-name="Acompañamiento humano" data-image="assets/valor-acompanamiento.png" data-alt="Odontóloga acompañando a una paciente durante su atención">
+            <span class="mono">D</span>
+            <div><h3>Acompañamiento humano</h3><p>Te brindamos una atención cercana, respetuosa y profesional desde la primera consulta hasta el final de tu tratamiento.</p></div>
+          </div>
+        </div>
+        <p style="margin-top:28px;font-size:1.08rem;font-weight:600;color:var(--mint-dark);">No solo transformamos sonrisas. Ayudamos a las personas a recuperar la confianza para volver a sonreír.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SEDES -->
+  <section id="sedes">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">Sedes</span>
+        <h2>Dos sedes, misma forma de trabajar.</h2>
+        <p>Elige la más cercana a ti. Ambas atienden todas las especialidades.</p>
+      </div>
+      <div class="sedes-grid">
+        <div class="sede-card">
+          <iframe class="sede-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d289.895879184042!2d-76.95637045226891!3d-12.155979052365808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b951542e8d79%3A0xcbcd8cac15f702c8!2sCl%C3%ADnica%20Dental%20OdontoMark!5e0!3m2!1ses-419!2spe!4v1783189278957!5m2!1ses-419!2spe" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Mapa sede Villa María del Triunfo"></iframe>
+          <div class="sede-body">
+            <span class="mono">Sede 1</span>
+            <h3>Villa María del Triunfo</h3>
+            <p>Calle San Eugenio 316, PJ San Gabriel, Villa María del Triunfo, Lima.</p>
+            <a class="link-out" href="https://maps.app.goo.gl/Jx5xMWDaUXQjvCL38" target="_blank" rel="noopener">Ver en Google Maps →</a>
+          </div>
+        </div>
+        <div class="sede-card">
+          <iframe class="sede-map" src="https://www.google.com/maps?q=-12.1908227,-76.9455906&z=17&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Mapa sede Villa El Salvador"></iframe>
+          <div class="sede-body">
+            <span class="mono">Sede 2</span>
+            <h3>Villa El Salvador</h3>
+            <p>1 De Mayo 510, Villa El Salvador 15828, Lima.</p>
+            <a class="link-out" href="https://maps.app.goo.gl/1U9PZf1QmLU6Kiyx7" target="_blank" rel="noopener">Ver en Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section id="equipo">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">Equipo</span>
+        <h2>Especialistas colegiados, no practicantes.</h2>
+        <p>Profesionales comprometidos con una atención cercana, coordinada y especializada en cada etapa de tu tratamiento.</p>
+      </div>
+      <div class="team-scroll">
+        <div class="doc-card">
+          <div class="doc-photo"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg></div>
+          <div class="doc-info"><span class="chief-badge">Jefe</span><h3>Dr. Ronald Siancas</h3><span class="role">Diseño de Sonrisa</span><span class="mono">COP 00000 · RNE 00000</span></div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-photo"><img src="assets/henry.png" alt="Dr. Henry Muller"></div>
+          <div class="doc-info"><h3>Dr. Henry Muller</h3><span class="role">Ortodoncia y ortopedia maxilar</span><span class="mono">COP 00000 · RNE 00000</span></div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-photo"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg></div>
+          <div class="doc-info"><h3>Dra. Marianny Luque</h3><span class="role">Ortodoncia</span><span class="mono">COP 00000 · RNE 00000</span></div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-photo"><img src="assets/ana-villareal.png" alt="Dra. Ana Villareal"></div>
+          <div class="doc-info"><h3>Dra. Ana Villareal</h3><span class="role">Odontopediatría</span><span class="mono">COP 00000 · RNE 00000</span></div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-photo"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v2h16v-2c0-2.8-3.6-5-8-5Z"/></svg></div>
+          <div class="doc-info"><h3>Dra. [Nombre]</h3><span class="role">Estética dental</span><span class="mono">COP 00000 · RNE 00000</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS (desactivado por ahora — descomenta este bloque cuando tengas reseñas reales)
+  <section id="testimonios" class="testimonials">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono">Testimonios</span>
+        <h2>Lo que dicen quienes ya pasaron por el sillón.</h2>
+      </div>
+      <div class="t-grid">
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p>"Reemplaza esto con una reseña real de Google o Facebook de tu clínica."</p>
+          <div class="who"><div class="t-avatar">J</div><div><strong>Nombre Apellido</strong><span>Paciente · Ortodoncia</span></div></div>
+        </div>
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p>"Reemplaza esto con una reseña real de Google o Facebook de tu clínica."</p>
+          <div class="who"><div class="t-avatar">M</div><div><strong>Nombre Apellido</strong><span>Paciente · Implantes</span></div></div>
+        </div>
+        <div class="t-card">
+          <div class="stars">★★★★★</div>
+          <p>"Reemplaza esto con una reseña real de Google o Facebook de tu clínica."</p>
+          <div class="who"><div class="t-avatar">R</div><div><strong>Nombre Apellido</strong><span>Paciente · Estética dental</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact">
+    <div class="wrap">
+      <div>
+        <span class="mono" style="color:var(--mint);">Contacto</span>
+        <h2>Agenda tu evaluación inicial.</h2>
+        <p class="lead">Escríbenos por WhatsApp o completa el formulario. Respondemos en horario de atención.</p>
+        <div class="info-list">
+          <div class="info-item">
+            <div class="ico">📍</div>
+            <div><h4>Sede Villa María del Triunfo</h4><p>Calle San Eugenio 316, PJ San Gabriel, Lima</p></div>
+          </div>
+          <div class="info-item">
+            <div class="ico">📍</div>
+            <div><h4>Sede Villa El Salvador</h4><p>1 De Mayo 510, Villa El Salvador 15828 </div>
+          </div>
+          <div class="info-item">
+            <div class="ico">🕗</div>
+            <div><h4>Horario</h4><p>Lunes a sábado, 9:00 a.m. – 8:00 p.m.</p></div>
+          </div>
+          <div class="info-item">
+            <div class="ico">💬</div>
+            <div><h4>WhatsApp</h4><p>+51 902 956 428</p></div>
+          </div>
+          <div class="info-item">
+            <div class="ico">✉️</div>
+            <div><h4>Correo</h4><p>contacto@odontomark.pe</p></div>
+          </div>
+        </div>
+        <div class="pay-row">
+          <span class="pay-chip">Efectivo</span>
+          <span class="pay-chip">Yape</span>
+          <span class="pay-chip">Plin</span>
+          <span class="pay-chip">Visa</span>
+          <span class="pay-chip">Transferencia</span>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Solicita tu cita</h3>
+        <p>Te contactamos para confirmar fecha y hora.</p>
+        <form onsubmit="return enviarWhatsApp(event)">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" type="text" required placeholder="Tu nombre">
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" type="tel" required placeholder="9xx xxx xxx">
+          <label for="especialidad">Especialidad de interés</label>
+          <select id="especialidad">
+            <option>Cirugía</option>
+            <option>Cirugía maxilofacial</option>
+            <option>Prostodoncia</option>
+            <option>Endodoncia</option>
+            <option>Implantología</option>
+            <option>Diseño de sonrisa</option>
+            <option>Ortodoncia</option>
+          </select>
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" rows="3" placeholder="Cuéntanos brevemente tu caso"></textarea>
+          <button type="submit" class="btn">Enviar por WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Clínica Dental Odontomark. Todos los derechos reservados.</span>
+    <div class="foot-links">
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">Facebook</a>
+      <a href="#" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float wa-link" href="https://wa.me/51902956428" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.06 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.9 7.9 0 0 0 3.85 1h.01a7.94 7.94 0 0 0 5.54-13.58ZM12.06 18.4a6.55 6.55 0 0 1-3.35-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.6 6.6 0 1 1 12.24-3.5 6.56 6.56 0 0 1-6.66 6.59Zm3.6-4.93c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.19-.5.64-.62.77-.11.13-.23.14-.42.05a5.4 5.4 0 0 1-1.6-.98 6 6 0 0 1-1.1-1.37c-.12-.2 0-.3.09-.4.09-.1.2-.24.3-.36.1-.12.13-.2.2-.33.06-.13.03-.25-.02-.35-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.34h-.38c-.13 0-.34.05-.52.24-.18.19-.68.66-.68 1.61 0 .95.7 1.87.8 2 .1.13 1.37 2.1 3.33 2.94.46.2.83.32 1.11.41.47.15.9.13 1.24.08.38-.06 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.08-.18-.13-.38-.23Z"/></svg>
+</a>
+
+<script>
+  // === ÚNICO LUGAR QUE DEBES EDITAR PARA CAMBIAR EL NÚMERO DE WHATSAPP ===
+  const WHATSAPP_NUMBER = "51902956428"; // formato: 51 + número, sin espacios ni +
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Actualiza automáticamente todos los botones/links de WhatsApp con mensajes de bienvenida
+  document.querySelectorAll('.wa-link').forEach(link => {
+    const mensajeGeneral = "Hola Odontomark, quisiera agendar una cita. ¿Me ayudan con la disponibilidad?";
+    link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensajeGeneral)}`;
+  });
+
+  const specialtyTrack = document.getElementById('specialty-track');
+  const specialtyCards = [...document.querySelectorAll('.tooth-card')];
+  let specialtyIndex = 0;
+  let carouselTimer;
+
+  function selectSpecialty(index, scroll = true){
+    specialtyIndex = (index + specialtyCards.length) % specialtyCards.length;
+    const card = specialtyCards[specialtyIndex];
+    specialtyCards.forEach(item => item.classList.remove('active'));
+    card.classList.add('active');
+    if(scroll){
+      const left = card.offsetLeft - (specialtyTrack.clientWidth - card.offsetWidth) / 2;
+      specialtyTrack.scrollTo({left, behavior:'smooth'});
+    }
+  }
+
+  function restartCarousel(){
+    window.clearInterval(carouselTimer);
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      carouselTimer = window.setInterval(() => selectSpecialty(specialtyIndex + 1), 4200);
+    }
+  }
+
+  specialtyCards.forEach((card, index) => card.addEventListener('click', () => {
+    selectSpecialty(index);
+    restartCarousel();
+  }));
+  document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+    selectSpecialty(specialtyIndex - 1);
+    restartCarousel();
+  });
+  document.querySelector('.carousel-btn.next').addEventListener('click', () => {
+    selectSpecialty(specialtyIndex + 1);
+    restartCarousel();
+  });
+  specialtyTrack.addEventListener('mouseenter', () => window.clearInterval(carouselTimer));
+  specialtyTrack.addEventListener('mouseleave', restartCarousel);
+  restartCarousel();
+
+  const valueItems = [...document.querySelectorAll('.why-item')];
+  const valueImage = document.getElementById('about-value-image');
+  const valueName = document.getElementById('about-value-name');
+
+  function selectValue(item){
+    valueItems.forEach(value => value.classList.remove('active'));
+    item.classList.add('active');
+    valueImage.classList.add('changing');
+    window.setTimeout(() => {
+      valueImage.src = item.dataset.image;
+      valueImage.alt = item.dataset.alt;
+      valueName.textContent = item.dataset.name;
+      valueImage.classList.remove('changing');
+    }, 180);
+  }
+
+  valueItems.forEach(item => {
+    item.addEventListener('click', () => selectValue(item));
+    item.addEventListener('keydown', event => {
+      if(event.key === 'Enter' || event.key === ' '){
+        event.preventDefault();
+        selectValue(item);
+      }
+    });
+  });
+
+  function enviarWhatsApp(e){
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const especialidad = document.getElementById('especialidad').value;
+    const mensaje = document.getElementById('mensaje').value;
+    const texto = `Hola Odontomark, soy ${nombre} (tel: ${telefono}). Me interesa una cita de ${especialidad}.${mensaje ? " " + mensaje : ""}`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`, '_blank');
+    return false;
+  }
+</script>
+
+</body>
+</html>

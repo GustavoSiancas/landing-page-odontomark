@@ -1,5 +1,9 @@
 :root{
     --ink:#121212;
+    --section-blue:#44a5c3;
+    --section-ink:#102f38;
+    --section-surface:rgba(255,255,255,.18);
+    --section-border:rgba(16,47,56,.28);
     --paper:#FFFFFF;
     --paper-2:#F3F3F3;
     --mint:#4CAECD;
@@ -265,9 +269,9 @@
   .section-head p{margin-top:16px; color:#4a4a4a; font-size:1.02rem;}
 
   /* ---------- ESPECIALIDADES (arc layout) ---------- */
-  .specialties{background:var(--ink); color:var(--paper);}
-  .specialties .section-head p{color:#b3b3b3;}
-  .specialties .section-head .mono{color:var(--mint);}
+  .specialties{background:var(--section-blue); color:var(--section-ink);}
+  .specialties .section-head p{color:var(--section-ink);}
+  .specialties .section-head .mono{color:var(--section-ink); font-weight:600;}
   .specialty-carousel{position:relative; padding:0 48px;}
   .arc-row{
     display:flex;
@@ -282,19 +286,19 @@
   .tooth-card{
     flex:0 0 calc((100% - 32px) / 3);
     min-width:240px;
-    background:rgba(246,244,237,0.06);
-    border:1px solid rgba(246,244,237,0.14);
+    background:var(--ink);
+    border:1px solid rgba(255,255,255,.22);
     border-radius:var(--radius);
     padding:26px 18px 22px;
     transition:transform .3s ease, background .3s ease, border-color .3s ease;
     cursor:pointer;
-    color:inherit;
+    color:var(--white);
     text-align:left;
     scroll-snap-align:start;
   }
   .tooth-card:hover,.tooth-card.active{
-    background:rgba(47,174,131,0.16);
-    border-color:var(--mint);
+    background:#1f1f1f;
+    border-color:var(--white);
     transform:translateY(-6px);
   }
   .carousel-btn{
@@ -309,7 +313,7 @@
   .tooth-card .num{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.72rem;
-    color:var(--mint);
+    color:var(--white);
     display:block;
     margin-bottom:16px;
   }
@@ -317,9 +321,9 @@
     width:46px; height:46px; margin-bottom:18px;
     display:grid; place-items:center;
     border-radius:14px;
-    color:var(--mint);
-    background:rgba(76,174,205,.12);
-    border:1px solid rgba(76,174,205,.28);
+    color:var(--white);
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.28);
   }
   .specialty-icon svg{width:27px; height:27px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
   .tooth-card h3{
@@ -329,7 +333,7 @@
   }
   .tooth-card p{
     font-size:0.86rem;
-    color:#c9c9c9;
+    color:#e5e5e5;
   }
 
   /* ---------- POR QUÉ ODONTOMARK ---------- */
@@ -402,18 +406,18 @@
   }
 
   /* ---------- SEDES ---------- */
-  #sedes{background:var(--ink); color:var(--paper);}
-  #sedes .section-head .mono{color:var(--mint);}
-  #sedes .section-head p{color:#bdbdbd;}
+  #sedes{background:var(--section-blue); color:var(--section-ink);}
+  #sedes .section-head .mono{color:var(--section-ink); font-weight:600;}
+  #sedes .section-head p{color:var(--section-ink);}
   .sedes-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:24px;
   }
-  .contact-kicker{color:var(--mint);}
+  .contact-kicker{color:var(--section-ink); font-weight:600;}
   .sede-card{
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.16);
+    background:var(--ink);
+    border:1px solid rgba(255,255,255,.22);
     border-radius:var(--radius);
     overflow:hidden;
   }
@@ -423,14 +427,14 @@
     border:0;
     display:block;
   }
-  .sede-body{padding:22px 24px 26px;}
-  .sede-body .mono{color:var(--mint); display:block; margin-bottom:8px;}
+  .sede-body{padding:22px 24px 26px; color:var(--white);}
+  .sede-body .mono{color:var(--white); display:block; margin-bottom:8px;}
   .sede-body h3{font-size:1.15rem; margin-bottom:8px;}
-  .sede-body p{font-size:0.92rem; color:#d0d0d0; margin-bottom:14px;}
+  .sede-body p{font-size:0.92rem; color:#e5e5e5; margin-bottom:14px;}
   .sede-body a.link-out{
     font-size:0.85rem;
     font-weight:600;
-    color:var(--mint);
+    color:var(--white);
     display:inline-flex;
     align-items:center;
     gap:6px;
@@ -567,32 +571,33 @@
   .who span{font-size:0.76rem; color:#8a8a8a;}
 
   /* ---------- CONTACTO ---------- */
-  .contact{background:var(--ink); color:var(--paper);}
+  .contact{background:var(--section-blue); color:var(--section-ink);}
   .contact .wrap{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:60px;
   }
-  .contact h2{color:var(--paper); font-size:clamp(1.9rem,3.4vw,2.6rem); max-width:14ch;}
-  .contact p.lead{color:#b3b3b3; margin-top:18px; max-width:44ch;}
+  .contact h2{color:var(--section-ink); font-size:clamp(1.9rem,3.4vw,2.6rem); max-width:14ch;}
+  .contact p.lead{color:var(--section-ink); margin-top:18px; max-width:44ch;}
   .info-list{margin-top:36px; display:flex; flex-direction:column; gap:22px;}
   .info-item{display:flex; gap:16px; align-items:flex-start;}
   .info-item .ico{
     width:38px;height:38px;border-radius:10px;
-    background:rgba(47,174,131,0.18);
+    background:rgba(255,255,255,.22);
+    border:1px solid var(--section-border);
     display:flex;align-items:center;justify-content:center;
     flex-shrink:0;
   }
   .info-item h4{font-size:0.95rem; margin-bottom:3px;}
-  .info-item p{font-size:0.86rem; color:#b3b3b3;}
+  .info-item p{font-size:0.86rem; color:var(--section-ink);}
   .pay-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:30px;}
   .pay-chip{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.7rem;
-    border:1px solid rgba(246,244,237,0.28);
+    border:1px solid var(--section-border);
     padding:7px 12px;
     border-radius:999px;
-    color:#e5e5e5;
+    color:var(--section-ink);
   }
   .form-card{
     background:var(--paper);

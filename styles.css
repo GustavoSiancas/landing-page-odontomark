@@ -483,6 +483,18 @@
     object-fit:cover;
     object-position:top center;
   }
+  .doc-photo-hover img{
+    position:absolute;
+    inset:0;
+    transition:opacity .35s ease, transform .45s ease;
+  }
+  .doc-photo-hover .photo-primary{opacity:1;}
+  .doc-photo-hover .photo-secondary{opacity:0; transform:scale(1.025);}
+  .doc-card:hover .doc-photo-hover .photo-primary{opacity:0;}
+  .doc-card:hover .doc-photo-hover .photo-secondary{opacity:1; transform:scale(1);}
+  @media (prefers-reduced-motion:reduce){
+    .doc-photo-hover img{transition:none;}
+  }
   .doc-photo svg{width:64px; height:64px; opacity:0.9;}
   .doc-info{
     position:absolute;

@@ -17,40 +17,78 @@
   const specialtyTrack = document.getElementById('specialty-track');
   const specialtyCards = [...document.querySelectorAll('.tooth-card')];
   let specialtyIndex = 0;
+  let specialtyPhysicalIndex = specialtyCards.length;
   let carouselTimer;
+
+  specialtyCards.forEach((card, index) => {
+    card.dataset.carouselIndex = index;
+  });
+  specialtyCards.forEach(card => specialtyTrack.append(card.cloneNode(true)));
+  [...specialtyCards].reverse().forEach(card => specialtyTrack.prepend(card.cloneNode(true)));
+
+  const allSpecialtyCards = [...specialtyTrack.querySelectorAll('.tooth-card')];
+
+  function centerSpecialty(card, behavior = 'smooth'){
+    const left = card.offsetLeft - (specialtyTrack.clientWidth - card.offsetWidth) / 2;
+    if(behavior === 'auto'){
+      const previousBehavior = specialtyTrack.style.scrollBehavior;
+      specialtyTrack.style.scrollBehavior = 'auto';
+      specialtyTrack.scrollTo({left, behavior:'auto'});
+      specialtyTrack.style.scrollBehavior = previousBehavior;
+      return;
+    }
+    specialtyTrack.scrollTo({left, behavior});
+  }
+
+  function normalizeSpecialtyPosition(){
+    if(specialtyPhysicalIndex >= specialtyCards.length * 2){
+      specialtyPhysicalIndex -= specialtyCards.length;
+      centerSpecialty(allSpecialtyCards[specialtyPhysicalIndex], 'auto');
+    }else if(specialtyPhysicalIndex < specialtyCards.length){
+      specialtyPhysicalIndex += specialtyCards.length;
+      centerSpecialty(allSpecialtyCards[specialtyPhysicalIndex], 'auto');
+    }
+  }
 
   function selectSpecialty(index, scroll = true){
     specialtyIndex = (index + specialtyCards.length) % specialtyCards.length;
-    const card = specialtyCards[specialtyIndex];
-    specialtyCards.forEach(item => item.classList.remove('active'));
-    card.classList.add('active');
+    allSpecialtyCards.forEach(item => {
+      item.classList.toggle('active', Number(item.dataset.carouselIndex) === specialtyIndex);
+    });
     if(scroll){
-      const left = card.offsetLeft - (specialtyTrack.clientWidth - card.offsetWidth) / 2;
-      specialtyTrack.scrollTo({left, behavior:'smooth'});
+      centerSpecialty(allSpecialtyCards[specialtyPhysicalIndex]);
+      window.setTimeout(normalizeSpecialtyPosition, 450);
     }
+  }
+
+  function stepSpecialty(direction){
+    specialtyPhysicalIndex += direction;
+    selectSpecialty(specialtyIndex + direction);
   }
 
   function restartCarousel(){
     window.clearInterval(carouselTimer);
     if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      carouselTimer = window.setInterval(() => selectSpecialty(specialtyIndex + 1), 4200);
+      carouselTimer = window.setInterval(() => stepSpecialty(1), 4200);
     }
   }
 
-  specialtyCards.forEach((card, index) => card.addEventListener('click', () => {
-    selectSpecialty(index);
+  allSpecialtyCards.forEach((card, physicalIndex) => card.addEventListener('click', () => {
+    specialtyPhysicalIndex = physicalIndex;
+    selectSpecialty(Number(card.dataset.carouselIndex));
     restartCarousel();
   }));
   document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
-    selectSpecialty(specialtyIndex - 1);
+    stepSpecialty(-1);
     restartCarousel();
   });
   document.querySelector('.carousel-btn.next').addEventListener('click', () => {
-    selectSpecialty(specialtyIndex + 1);
+    stepSpecialty(1);
     restartCarousel();
   });
   specialtyTrack.addEventListener('mouseenter', () => window.clearInterval(carouselTimer));
   specialtyTrack.addEventListener('mouseleave', restartCarousel);
+  window.requestAnimationFrame(() => centerSpecialty(allSpecialtyCards[specialtyPhysicalIndex], 'auto'));
   restartCarousel();
 
   const valueItems = [...document.querySelectorAll('.why-item')];
@@ -80,14 +118,44 @@
   });
 
   const teamTrack = document.getElementById('team-track');
-  const teamStep = direction => {
-    const card = teamTrack.querySelector('.doc-card');
-    if(!card) return;
+  const teamCards = [...teamTrack.querySelectorAll('.doc-card')];
+  let teamPhysicalIndex = teamCards.length;
+
+  teamCards.forEach(card => teamTrack.append(card.cloneNode(true)));
+  [...teamCards].reverse().forEach(card => teamTrack.prepend(card.cloneNode(true)));
+
+  const allTeamCards = [...teamTrack.querySelectorAll('.doc-card')];
+  const teamCardWidth = () => {
     const gap = parseFloat(getComputedStyle(teamTrack).gap) || 0;
-    teamTrack.scrollBy({left:direction * (card.offsetWidth + gap), behavior:'smooth'});
+    return allTeamCards[0].offsetWidth + gap;
+  };
+  const setTeamPosition = (index, behavior = 'smooth') => {
+    if(behavior === 'auto'){
+      const previousBehavior = teamTrack.style.scrollBehavior;
+      teamTrack.style.scrollBehavior = 'auto';
+      teamTrack.scrollTo({left:index * teamCardWidth(), behavior:'auto'});
+      teamTrack.style.scrollBehavior = previousBehavior;
+      return;
+    }
+    teamTrack.scrollTo({left:index * teamCardWidth(), behavior});
+  };
+  const teamStep = direction => {
+    teamPhysicalIndex += direction;
+    setTeamPosition(teamPhysicalIndex);
+    window.setTimeout(() => {
+      if(teamPhysicalIndex >= teamCards.length * 2){
+        teamPhysicalIndex -= teamCards.length;
+        setTeamPosition(teamPhysicalIndex, 'auto');
+      }else if(teamPhysicalIndex < teamCards.length){
+        teamPhysicalIndex += teamCards.length;
+        setTeamPosition(teamPhysicalIndex, 'auto');
+      }
+    }, 450);
   };
   document.querySelector('.team-btn.prev').addEventListener('click', () => teamStep(-1));
   document.querySelector('.team-btn.next').addEventListener('click', () => teamStep(1));
+  window.requestAnimationFrame(() => setTeamPosition(teamPhysicalIndex, 'auto'));
+  window.addEventListener('resize', () => setTeamPosition(teamPhysicalIndex, 'auto'));
 
   const appointmentForm = document.getElementById('appointment-form');
 

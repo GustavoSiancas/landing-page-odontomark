@@ -2,7 +2,9 @@ import type { Doctor, Location, Specialty, Value } from '../types'
 import henry from '../assets/henry.png'
 import henrySecondary from '../assets/henry-2.png'
 import junior from '../assets/junior.png'
+import juniorSecondary from '../assets/junior-2.png'
 import marianny from '../assets/marianny.png'
+import mariannySecondary from '../assets/marianny-2.png'
 import valueSupport from '../assets/valor-acompanamiento.png'
 import valueConfidence from '../assets/valor-confianza.png'
 import valueListening from '../assets/valor-escuchamos.png'
@@ -28,8 +30,8 @@ export const values: Value[] = [
 export const doctors: Doctor[] = [
   { name: 'Dr. Ronald Siancas', role: 'Diseño de Sonrisa', license: 'COP 00000 · RNE 00000', chief: true },
   { name: 'Dr. Henry Muller', role: 'Ortodoncia y ortopedia maxilar', license: 'COP 00000 · RNE 00000', image: henry, hoverImage: henrySecondary },
-  { name: 'Dra. Marianny Luque', role: 'Ortodoncia', license: 'COP 00000 · RNE 00000', image: marianny },
-  { name: 'Junior Bermejo Quispe', role: 'Ortodoncia y ortopedia maxilar', license: 'COP 37097', image: junior },
+  { name: 'Dra. Marianny Luque', role: 'Ortodoncia', license: 'COP 49290', image: marianny, hoverImage: mariannySecondary },
+  { name: 'Junior Bermejo Quispe', role: 'Ortodoncia y ortopedia maxilar', license: 'COP 37097', image: junior, hoverImage: juniorSecondary },
   { name: 'Dra. [Nombre]', role: 'Estética dental', license: 'COP 00000 · RNE 00000' },
 ]
 

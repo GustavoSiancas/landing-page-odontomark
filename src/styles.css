@@ -488,12 +488,12 @@
   .doc-photo-hover img{
     position:absolute;
     inset:0;
-    transition:opacity .35s ease, transform .45s ease;
+    transition:none;
   }
-  .doc-photo-hover .photo-primary{opacity:1;}
-  .doc-photo-hover .photo-secondary{opacity:0; transform:scale(1.025);}
-  .doc-card:hover .doc-photo-hover .photo-primary{opacity:0;}
-  .doc-card:hover .doc-photo-hover .photo-secondary{opacity:1; transform:scale(1);}
+  .doc-photo-hover .photo-primary{opacity:1; animation:photoRotation 4s ease-in-out infinite;}
+  .doc-photo-hover .photo-secondary{opacity:0; animation:photoRotation 4s -2s ease-in-out infinite;}
+  .doc-card:hover .doc-photo-hover .photo-primary,
+  .doc-card:hover .doc-photo-hover .photo-secondary{transform:none;}
   @media (prefers-reduced-motion:reduce){
     .doc-photo-hover img{transition:none;}
   }
@@ -757,9 +757,12 @@ section{position:relative;}
 #equipo{overflow:hidden; background:linear-gradient(180deg,#fff,#edf8fb 55%,#fff);}
 #equipo::before{content:""; position:absolute; width:42rem;height:42rem;border-radius:50%;background:rgba(76,174,205,.12);filter:blur(100px);right:-22rem;top:0;}
 .team-marquee{padding:18px 0 34px; overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
-.team-scroll{display:block; overflow:hidden; padding:0; scroll-snap-type:none;}
+.team-scroll{display:block; overflow:hidden; padding:18px 0 28px; scroll-snap-type:none;}
 .team-track-loop{display:flex; width:max-content; animation:teamFlow 34s linear infinite; will-change:transform;}
-.team-marquee:hover .team-track-loop{animation-play-state:paused;}
+.team-marquee{cursor:grab; user-select:none; touch-action:pan-y;}
+.team-marquee.is-pressing{cursor:grabbing;}
+.team-marquee.is-pressing .team-track-loop{animation-play-state:paused;}
+.team-marquee img{-webkit-user-drag:none; user-select:none;}
 .team-group{display:flex; gap:20px; padding-right:20px;}
 .team-group .doc-card{flex:0 0 250px; width:250px; aspect-ratio:1/1.62; border:1px solid rgba(76,174,205,.2); box-shadow:0 18px 45px rgba(7,20,25,.14); transition:transform .35s,box-shadow .35s;}
 .team-group .doc-card:hover{transform:translateY(-8px) scale(1.015); box-shadow:0 26px 60px rgba(31,122,150,.24);}
@@ -775,6 +778,11 @@ section{position:relative;}
 .reveal-ready{opacity:0; transform:translateY(34px); transition:opacity .85s cubic-bezier(.2,.8,.2,1),transform .85s cubic-bezier(.2,.8,.2,1);}
 .reveal-ready.is-visible{opacity:1; transform:none;}
 @keyframes teamFlow{to{transform:translateX(-50%);}}
+@keyframes photoRotation{
+  0%,40%{opacity:1}
+  50%,90%{opacity:0}
+  100%{opacity:1}
+}
 @keyframes heroEnter{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @keyframes photoEnter{from{opacity:0;transform:scale(.92) translateX(30px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -795,4 +803,6 @@ section{position:relative;}
   .reveal-ready{opacity:1;transform:none;}
   .team-track-loop{animation:none;}
   .team-scroll{overflow-x:auto;}
+  .doc-photo-hover .photo-primary{animation:none;opacity:1;}
+  .doc-photo-hover .photo-secondary{animation:none;opacity:0;}
 }

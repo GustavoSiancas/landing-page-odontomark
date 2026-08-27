@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { whatsappUrl } from '../config/contact'
-import logo from '../assets/logo-odontomark.png'
+import logo from '../assets/brand/logo-odontomark.png'
 
-const links = [['especialidades', 'Especialidades'], ['nosotros', 'Nosotros'], ['sedes', 'Sedes'], ['equipo', 'Equipo'], ['contacto', 'Contacto']]
+const links = [['especialidades', 'Especialidades'], ['sedes', 'Sedes'], ['equipo', 'Equipo'], ['contacto', 'Contacto']]
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)

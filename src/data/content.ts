@@ -1,14 +1,10 @@
-import type { Doctor, Location, Specialty, Value } from '../types'
-import henry from '../assets/henry.png'
-import henrySecondary from '../assets/henry-2.png'
-import junior from '../assets/junior.png'
-import juniorSecondary from '../assets/junior-2.png'
-import marianny from '../assets/marianny.png'
-import mariannySecondary from '../assets/marianny-2.png'
-import valueSupport from '../assets/valor-acompanamiento.png'
-import valueConfidence from '../assets/valor-confianza.png'
-import valueListening from '../assets/valor-escuchamos.png'
-import valuePeople from '../assets/valor-personas.png'
+import type { Doctor, Location, Specialty } from '../types'
+import henry from '../assets/photos/doctors/henry.png'
+import henrySecondary from '../assets/photos/doctors/henry-2.png'
+import junior from '../assets/photos/doctors/junior.png'
+import juniorSecondary from '../assets/photos/doctors/junior-2.png'
+import marianny from '../assets/photos/doctors/marianny.png'
+import mariannySecondary from '../assets/photos/doctors/marianny-2.png'
 
 export const specialties: Specialty[] = [
   { id: 1, name: 'Cirugía', icon: '✦', description: 'Realizamos procedimientos quirúrgicos orales con evaluación previa, planificación cuidadosa y seguimiento cercano.' },
@@ -18,13 +14,6 @@ export const specialties: Specialty[] = [
   { id: 5, name: 'Implantología', icon: '╫', description: 'Reemplazamos piezas perdidas mediante implantes planificados para recuperar estabilidad, función y una apariencia natural.' },
   { id: 6, name: 'Diseño de sonrisa', icon: '✧', description: 'Analizamos forma, color y proporción dental para diseñar una sonrisa armónica y acorde con tus objetivos.' },
   { id: 7, name: 'Ortodoncia', icon: '▦', description: 'Corregimos la posición de los dientes y la mordida mediante alternativas adaptadas a cada paciente.' },
-]
-
-export const values: Value[] = [
-  { id: 'A', name: 'Te escuchamos primero', image: valueListening, alt: 'Odontóloga escuchando atentamente a una paciente', description: 'Escuchamos tus opiniones, resolvemos tus dudas y diseñamos un tratamiento de acuerdo con tus necesidades y objetivos.' },
-  { id: 'B', name: 'Tratamos personas, no solo dientes', image: valuePeople, alt: 'Odontóloga recibiendo con calidez a una paciente', description: 'Entendemos que muchas personas llegan porque dejaron de sonreír, evitan las fotografías o perdieron confianza en sí mismas.' },
-  { id: 'C', name: 'Recuperar confianza', image: valueConfidence, alt: 'Paciente recuperando la confianza en su sonrisa', description: 'Nuestro propósito es ayudarte a sonreír, hablar, comer y relacionarte con mayor seguridad, favoreciendo tu bienestar cotidiano.' },
-  { id: 'D', name: 'Acompañamiento humano', image: valueSupport, alt: 'Odontóloga acompañando a una paciente durante su atención', description: 'Te brindamos una atención cercana, respetuosa y profesional desde la primera consulta hasta el final de tu tratamiento.' },
 ]
 
 export const doctors: Doctor[] = [

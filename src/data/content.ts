@@ -1,10 +1,10 @@
 import type { Doctor, Location, Specialty } from '../types'
-import henry from '../assets/photos/doctors/henry.png'
-import henrySecondary from '../assets/photos/doctors/henry-2.png'
-import junior from '../assets/photos/doctors/junior.png'
-import juniorSecondary from '../assets/photos/doctors/junior-2.png'
-import marianny from '../assets/photos/doctors/marianny.png'
-import mariannySecondary from '../assets/photos/doctors/marianny-2.png'
+import henry from '../assets/photos/doctors/optimized/henry.webp'
+import henrySecondary from '../assets/photos/doctors/optimized/henry-2.webp'
+import junior from '../assets/photos/doctors/optimized/junior.webp'
+import juniorSecondary from '../assets/photos/doctors/optimized/junior-2.webp'
+import marianny from '../assets/photos/doctors/optimized/marianny.webp'
+import mariannySecondary from '../assets/photos/doctors/optimized/marianny-2.webp'
 
 export const specialties: Specialty[] = [
   {

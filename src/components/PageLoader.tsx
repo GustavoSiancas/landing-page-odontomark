@@ -4,32 +4,19 @@ import logo from '../assets/brand/logo-odontomark.png'
 const wait = (milliseconds: number) =>
   new Promise<void>((resolve) => window.setTimeout(resolve, milliseconds))
 
-function waitForWindowLoad() {
-  if (document.readyState === 'complete') return Promise.resolve()
-  return new Promise<void>((resolve) =>
-    window.addEventListener('load', () => resolve(), { once: true }),
-  )
-}
-
-function waitForMedia() {
-  const media = Array.from(
-    document.querySelectorAll<HTMLImageElement | HTMLVideoElement>('img, video'),
-  )
+function waitForImages() {
+  const images = Array.from(document.querySelectorAll<HTMLImageElement>('img[data-critical]'))
 
   return Promise.all(
-    media.map(
+    images.map(
       (element) =>
         new Promise<void>((resolve) => {
-          const isReady =
-            element instanceof HTMLImageElement ? element.complete : element.readyState >= 2
-
-          if (isReady) {
+          if (element.complete) {
             resolve()
             return
           }
 
-          const readyEvent = element instanceof HTMLImageElement ? 'load' : 'loadeddata'
-          element.addEventListener(readyEvent, () => resolve(), { once: true })
+          element.addEventListener('load', () => resolve(), { once: true })
           element.addEventListener('error', () => resolve(), { once: true })
         }),
     ),
@@ -48,9 +35,9 @@ export function PageLoader() {
       await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()))
 
       const fontsReady = document.fonts?.ready ?? Promise.resolve()
-      const assetsReady = Promise.all([waitForWindowLoad(), fontsReady, waitForMedia(), wait(900)])
+      const assetsReady = Promise.all([fontsReady, waitForImages(), wait(600)])
 
-      await Promise.race([assetsReady, wait(10_000)])
+      await Promise.race([assetsReady, wait(2500)])
       if (disposed) return
 
       setLeaving(true)
@@ -74,7 +61,7 @@ export function PageLoader() {
     <div className={`page-loader ${leaving ? 'is-leaving' : ''}`} role="status" aria-live="polite">
       <div className="page-loader-mark">
         <span className="page-loader-orbit" aria-hidden="true" />
-        <img src={logo} alt="Odontomark" />
+        <img src={logo} alt="Odontomark" data-critical />
       </div>
       <span className="page-loader-label">Preparando tu experiencia</span>
       <span className="page-loader-line" aria-hidden="true" />

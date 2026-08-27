@@ -20,7 +20,13 @@ function DoctorCard({
     <article className="doc-card" aria-hidden={clone || undefined}>
       <div className={`doc-photo ${doctor.hoverImage ? 'doc-photo-hover' : ''}`}>
         {doctor.image ? (
-          <img className="photo-primary" src={doctor.image} alt={clone ? '' : doctor.name} />
+          <img
+            className="photo-primary"
+            src={doctor.image}
+            alt={clone ? '' : doctor.name}
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <Placeholder />
         )}
@@ -29,6 +35,8 @@ function DoctorCard({
             className="photo-secondary"
             src={doctor.hoverImage}
             alt={clone ? '' : `${doctor.name}, segunda fotografía`}
+            loading="lazy"
+            decoding="async"
           />
         )}
         {doctor.chief && <span className="chief-badge">Jefe</span>}

@@ -22,7 +22,7 @@ export function Header() {
     <header id="site-header" className={`${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
       <div className="wrap">
         <a href="#top" className="logo">
-          <img src={logo} alt="Odontomark" className="logo-img" />
+          <img src={logo} alt="Odontomark" className="logo-img" data-critical />
           <span className="logo-text">
             <span className="eyebrow-word">Clínica Dental</span>
             <strong>Odontomark</strong>

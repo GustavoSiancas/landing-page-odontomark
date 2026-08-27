@@ -9,6 +9,19 @@ npm run dev
 
 El contenido está en `src/data/content.ts` y la configuración de WhatsApp en `src/config/contact.ts`.
 
+## Recursos multimedia
+
+- `src/assets/videos/source`: videos originales, no se incluyen en el build.
+- `src/assets/videos/desktop`: versiones H.264 de 540×960 y 24 fps.
+- `src/assets/videos/mobile`: versiones H.264 de 360×640 y 20 fps.
+- `src/assets/videos/posters`: portadas WebP para conexiones limitadas y carga progresiva.
+- `src/assets/photos/doctors/source`: fotografías PNG originales.
+- `src/assets/photos/doctors/optimized`: fotografías WebP utilizadas por la web.
+
+La portada selecciona automáticamente una experiencia estática, móvil o de escritorio usando
+preferencias de movimiento, ahorro de datos, tipo de conexión, memoria aproximada, núcleos y ancho
+de pantalla. Los videos fuera del viewport permanecen pausados.
+
 ## Calidad de código
 
 ```bash

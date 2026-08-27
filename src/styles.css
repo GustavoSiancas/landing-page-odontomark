@@ -573,6 +573,12 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
+.sedes-carousel {
+  position: relative;
+}
+.sede-carousel-btn {
+  display: none;
+}
 .contact-kicker {
   color: var(--mint);
 }
@@ -617,8 +623,45 @@ section {
   text-decoration: underline;
 }
 @media (max-width: 900px) {
+  .sedes-carousel {
+    padding-bottom: 58px;
+  }
   .sedes-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .sedes-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .sede-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    scroll-snap-align: center;
+  }
+  .sede-carousel-btn {
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(114, 230, 255, 0.38);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    font-size: 1.25rem;
+    cursor: pointer;
+    box-shadow: 0 0 22px rgba(76, 174, 205, 0.16);
+  }
+  .sede-carousel-btn.prev {
+    left: calc(50% - 48px);
+  }
+  .sede-carousel-btn.next {
+    right: calc(50% - 48px);
   }
 }
 
@@ -1059,11 +1102,11 @@ footer a:hover {
     margin: 0 auto;
   }
   .specialty-carousel {
-    padding: 0 42px;
+    padding: 0 0 58px;
   }
   .tooth-card {
-    flex-basis: min(82vw, 320px);
-    min-width: 0;
+    flex: 0 0 100%;
+    min-width: 100%;
   }
   .tooth-card {
     transform: none !important;
@@ -2033,7 +2076,30 @@ header:not(.scrolled) .nav-toggle span {
     min-height: auto;
   }
   .specialties .tooth-card {
-    min-height: 340px;
+    min-height: 310px;
+    padding: 28px 26px;
+  }
+  .specialties .tooth-card h3 {
+    font-size: 1.22rem;
+  }
+  .specialties .tooth-card p {
+    font-size: 0.96rem;
+  }
+  .specialties .arc-row {
+    gap: 12px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .specialties .carousel-btn {
+    top: auto;
+    bottom: 0;
+    transform: none;
+  }
+  .specialties .carousel-btn.prev {
+    left: calc(50% - 48px);
+  }
+  .specialties .carousel-btn.next {
+    right: calc(50% - 48px);
   }
   .sede-map {
     height: 285px;

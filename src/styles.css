@@ -1303,6 +1303,40 @@ section {
   background: var(--mint-dark);
   color: var(--white);
 }
+.specialties,
+#sedes,
+#equipo {
+  min-height: 900px;
+  display: flex;
+  align-items: center;
+}
+.specialties > .wrap,
+#sedes > .wrap,
+#equipo > .wrap {
+  width: 100%;
+}
+.specialties .tooth-card {
+  min-height: 350px;
+  padding: 34px 26px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.specialties .tooth-card p {
+  margin-top: auto;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+.specialties .tooth-card h3 {
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+.specialties .tooth-card .num {
+  font-size: 0.8rem;
+}
+.specialties .specialty-icon {
+  width: 54px;
+  height: 54px;
+}
 .tooth-card {
   position: relative;
   overflow: hidden;
@@ -1371,6 +1405,22 @@ section {
 .sede-card:hover {
   transform: translateY(-7px);
   border-color: rgba(114, 230, 255, 0.55);
+}
+.sede-map {
+  height: 300px;
+}
+.sede-body {
+  min-height: 175px;
+  padding: 28px 30px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sede-body p {
+  margin-bottom: 20px;
+}
+.sede-body .link-out {
+  margin-top: auto;
 }
 .sede-map {
   filter: saturate(0.72) contrast(1.08);
@@ -1487,6 +1537,119 @@ section {
   animation: waBreathe 3s ease-in-out infinite;
 }
 
+/* ---------- CARGA INICIAL ---------- */
+body.is-loading {
+  overflow: hidden;
+}
+body.is-loading main *,
+body.is-loading header * {
+  animation-play-state: paused !important;
+}
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  color: var(--white);
+  background:
+    radial-gradient(circle at center, rgba(76, 174, 205, 0.18), transparent 30rem),
+    linear-gradient(145deg, #061116, #0b2028 58%, #061116);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.65s ease,
+    visibility 0.65s ease;
+}
+.page-loader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(114, 230, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(114, 230, 255, 0.08) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+.page-loader.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+.page-loader-mark {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+}
+.page-loader-mark img {
+  position: relative;
+  z-index: 2;
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(114, 230, 255, 0.35));
+  animation: loaderLogo 2s ease-in-out infinite;
+}
+.page-loader-orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(114, 230, 255, 0.2);
+  border-top-color: var(--electric);
+  border-right-color: rgba(114, 230, 255, 0.7);
+  border-radius: 50%;
+  box-shadow:
+    0 0 35px rgba(76, 174, 205, 0.18),
+    inset 0 0 30px rgba(76, 174, 205, 0.08);
+  animation: loaderOrbit 1.7s linear infinite;
+}
+.page-loader-label {
+  position: relative;
+  font:
+    500 0.68rem 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.page-loader-line {
+  position: relative;
+  width: min(220px, 60vw);
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+}
+.page-loader-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  animation: loaderProgress 1.35s ease-in-out infinite;
+}
+@keyframes loaderOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loaderLogo {
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 34px rgba(114, 230, 255, 0.5));
+  }
+}
+@keyframes loaderProgress {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 /* ---------- VIDEO CTA / TIKTOK WALL ---------- */
 .video-cta {
   min-height: 720px;
@@ -1575,6 +1738,38 @@ section {
   padding-bottom: 110px;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.65);
 }
+.video-cta-panel {
+  position: relative;
+  width: min(720px, 100%);
+  padding: 46px 50px 50px;
+  overflow: hidden;
+  border: 1px solid rgba(114, 230, 255, 0.28);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(4, 17, 22, 0.82), rgba(7, 28, 35, 0.57));
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 55px rgba(76, 174, 205, 0.13);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  animation:
+    ctaPanelIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) both,
+    ctaPanelFloat 6s 1s ease-in-out infinite;
+}
+.video-cta-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(114, 230, 255, 0.08) 46%,
+    transparent 72%
+  );
+  transform: translateX(-110%);
+  animation: panelScan 7s 1.6s ease-in-out infinite;
+}
 .video-cta-content .mono {
   display: inline-flex;
   align-items: center;
@@ -1621,7 +1816,7 @@ header:not(.scrolled) .header-cta {
 header:not(.scrolled) .nav-toggle span {
   background: var(--white);
 }
-.video-cta-content > p {
+.video-cta-panel > p {
   max-width: 49ch;
   margin-top: 25px;
   color: rgba(255, 255, 255, 0.82);
@@ -1688,6 +1883,35 @@ header:not(.scrolled) .nav-toggle span {
 @keyframes ctaArrow {
   50% {
     transform: translateY(5px);
+  }
+}
+@keyframes ctaPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ctaPanelFloat {
+  50% {
+    transform: translateY(-6px);
+    box-shadow:
+      0 40px 100px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 70px rgba(76, 174, 205, 0.2);
+  }
+}
+@keyframes panelScan {
+  0%,
+  62% {
+    transform: translateX(-110%);
+  }
+  82%,
+  100% {
+    transform: translateX(110%);
   }
 }
 @keyframes photoRotation {
@@ -1798,6 +2022,21 @@ header:not(.scrolled) .nav-toggle span {
     align-items: center;
     padding-top: 90px;
     padding-bottom: 90px;
+  }
+  .video-cta-panel {
+    padding: 32px 22px 36px;
+    border-radius: 22px;
+  }
+  .specialties,
+  #sedes,
+  #equipo {
+    min-height: auto;
+  }
+  .specialties .tooth-card {
+    min-height: 340px;
+  }
+  .sede-map {
+    height: 285px;
   }
   .video-cta h1 {
     font-size: clamp(2.7rem, 13vw, 4.2rem);

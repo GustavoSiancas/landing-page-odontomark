@@ -1,6 +1,7 @@
 import { Contact } from './components/Contact'
 import { Header } from './components/Header'
 import { Locations } from './components/Locations'
+import { PageLoader } from './components/PageLoader'
 import { Specialties } from './components/Specialties'
 import { Team } from './components/Team'
 import { VideoCta } from './components/VideoCta'
@@ -34,6 +35,7 @@ export default function App() {
   useRevealAnimations()
   return (
     <>
+      <PageLoader />
       <Header />
       <main id="top">
         <VideoCta />

@@ -889,8 +889,9 @@ section {
 }
 .contact .wrap {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: clamp(42px, 6vw, 76px);
+  align-items: stretch;
 }
 .contact h2 {
   color: var(--paper);
@@ -913,6 +914,9 @@ section {
   gap: 16px;
   align-items: flex-start;
 }
+.info-item > div:last-child {
+  min-width: 0;
+}
 .info-item .ico {
   width: 38px;
   height: 38px;
@@ -930,22 +934,63 @@ section {
 .info-item p {
   font-size: 0.86rem;
   color: #b3b3b3;
+  overflow-wrap: anywhere;
 }
-.pay-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.payment-section {
   margin-top: 30px;
 }
-.pay-chip {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.7rem;
-  border: 1px solid rgba(246, 244, 237, 0.28);
-  padding: 7px 12px;
-  border-radius: 999px;
-  color: #e5e5e5;
+.payment-label {
+  display: block;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.payment-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+  border-block: 1px solid rgba(114, 230, 255, 0.16);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.payment-track {
+  display: flex;
+  width: max-content;
+  animation: paymentFlow 17s linear infinite;
+  will-change: transform;
+}
+.payment-group {
+  display: flex;
+  gap: 14px;
+  padding-right: 14px;
+}
+.payment-item {
+  flex: 0 0 142px;
+  width: 142px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  padding: 6px 14px;
+  border: 1px solid rgba(114, 230, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(114, 230, 255, 0.035);
+}
+.payment-item img {
+  width: 104px;
+  height: 60px;
+  object-fit: contain;
+}
+@keyframes paymentFlow {
+  to {
+    transform: translateX(-50%);
+  }
 }
 .form-card {
+  width: 100%;
+  height: 100%;
+  max-width: 440px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: var(--paper);
   color: var(--ink);
   border-radius: 24px;
@@ -958,17 +1003,25 @@ section {
 .form-card p {
   font-size: 0.88rem;
   color: #4a4a4a;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
-.form-card label {
+.form-card form {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: clamp(28px, 4vh, 42px);
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+.form-card .form-field label {
   display: block;
   font-size: 0.78rem;
   font-weight: 600;
-  margin-bottom: 6px;
-  margin-top: 16px;
-}
-.form-card label:first-of-type {
-  margin-top: 0;
+  margin: 0 0 8px;
 }
 .form-card input,
 .form-card select,
@@ -991,7 +1044,7 @@ section {
 .form-card .btn {
   width: 100%;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 /* ---------- FOOTER ---------- */
@@ -1001,8 +1054,9 @@ footer {
 }
 footer .wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
   border-top: 1px solid rgba(246, 244, 237, 0.14);
   padding-top: 28px;
   color: #9a9a9a;
@@ -1106,6 +1160,18 @@ footer a:hover {
   }
   .contact .wrap {
     grid-template-columns: 1fr;
+  }
+  .contact .form-card {
+    height: auto;
+    max-width: none;
+    justify-self: stretch;
+  }
+  .form-card form {
+    gap: 18px;
+    justify-content: flex-start;
+  }
+  .form-card .btn {
+    margin-top: 6px;
   }
   .hero-stats {
     gap: 24px;
@@ -1976,6 +2042,28 @@ header:not(.scrolled) .nav-toggle span {
     justify-content: center;
   }
 }
+@media (max-width: 440px) {
+  .contact .wrap {
+    gap: 34px;
+  }
+  .contact h2 {
+    font-size: clamp(1.8rem, 10vw, 2.35rem);
+  }
+  .form-card {
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+  .payment-item {
+    flex-basis: 126px;
+    width: 126px;
+  }
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -2001,5 +2089,19 @@ header:not(.scrolled) .nav-toggle span {
   .tiktok-track,
   .video-cta-link span {
     animation: none;
+  }
+  .payment-track {
+    width: max-content;
+    animation: none;
+  }
+  .payment-marquee {
+    overflow-x: auto;
+    mask-image: none;
+  }
+  .payment-group {
+    padding-right: 0;
+  }
+  .payment-group[aria-hidden='true'] {
+    display: none;
   }
 }

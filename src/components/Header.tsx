@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { whatsappUrl } from '../config/contact'
-import logo from '../assets/brand/logo-odontomark.png'
+import logo from '../assets/brand/logo-odontomark.webp'
 
 const links = [
   ['especialidades', 'Especialidades'],
@@ -15,14 +15,14 @@ export function Header() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     onScroll()
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
   return (
     <header id="site-header" className={`${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
       <div className="wrap">
         <a href="#top" className="logo">
-          <img src={logo} alt="Odontomark" className="logo-img" data-critical />
+          <img src={logo} alt="Odontomark" className="logo-img" width="192" height="192" />
           <span className="logo-text">
             <span className="eyebrow-word">Clínica Dental</span>
             <strong>Odontomark</strong>
@@ -50,7 +50,7 @@ export function Header() {
         <button
           className="nav-toggle"
           type="button"
-          aria-label="Abrir menú"
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >

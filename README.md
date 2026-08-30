@@ -12,8 +12,8 @@ El contenido está en `src/data/content.ts` y la configuración de WhatsApp en `
 ## Recursos multimedia
 
 - `src/assets/videos/source`: videos originales, no se incluyen en el build.
-- `src/assets/videos/desktop`: versiones H.264 de 540×960 y 24 fps.
-- `src/assets/videos/mobile`: versiones H.264 de 360×640 y 20 fps.
+- `src/assets/videos/desktop`: clips de 9 s en WebM VP9 y MP4 H.264, 540×960 y 24 fps.
+- `src/assets/videos/mobile`: clips de 9 s en WebM VP9 y MP4 H.264, 360×640 y 20 fps.
 - `src/assets/videos/posters`: portadas WebP para conexiones limitadas y carga progresiva.
 - `src/assets/photos/doctors/source`: fotografías PNG originales.
 - `src/assets/photos/doctors/optimized`: fotografías WebP utilizadas por la web.

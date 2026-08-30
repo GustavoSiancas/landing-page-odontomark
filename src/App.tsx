@@ -1,7 +1,6 @@
 import { Contact } from './components/Contact'
 import { Header } from './components/Header'
 import { Locations } from './components/Locations'
-import { PageLoader } from './components/PageLoader'
 import { Specialties } from './components/Specialties'
 import { Team } from './components/Team'
 import { VideoCta } from './components/VideoCta'
@@ -22,11 +21,6 @@ function Footer() {
         <span>
           © {new Date().getFullYear()} Clínica Dental Odontomark. Todos los derechos reservados.
         </span>
-        <div className="foot-links">
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
-          <a href="#">TikTok</a>
-        </div>
       </div>
     </footer>
   )
@@ -35,7 +29,6 @@ export default function App() {
   useRevealAnimations()
   return (
     <>
-      <PageLoader />
       <Header />
       <main id="top">
         <VideoCta />

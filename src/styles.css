@@ -1562,119 +1562,6 @@ section {
   animation: waBreathe 3s ease-in-out infinite;
 }
 
-/* ---------- CARGA INICIAL ---------- */
-body.is-loading {
-  overflow: hidden;
-}
-body.is-loading main *,
-body.is-loading header * {
-  animation-play-state: paused !important;
-}
-.page-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  color: var(--white);
-  background:
-    radial-gradient(circle at center, rgba(76, 174, 205, 0.18), transparent 30rem),
-    linear-gradient(145deg, #061116, #0b2028 58%, #061116);
-  opacity: 1;
-  visibility: visible;
-  transition:
-    opacity 0.65s ease,
-    visibility 0.65s ease;
-}
-.page-loader::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.35;
-  background-image:
-    linear-gradient(rgba(114, 230, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(114, 230, 255, 0.08) 1px, transparent 1px);
-  background-size: 52px 52px;
-}
-.page-loader.is-leaving {
-  opacity: 0;
-  visibility: hidden;
-}
-.page-loader-mark {
-  position: relative;
-  width: 132px;
-  height: 132px;
-  display: grid;
-  place-items: center;
-}
-.page-loader-mark img {
-  position: relative;
-  z-index: 2;
-  width: 86px;
-  height: 86px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 24px rgba(114, 230, 255, 0.35));
-  animation: loaderLogo 2s ease-in-out infinite;
-}
-.page-loader-orbit {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(114, 230, 255, 0.2);
-  border-top-color: var(--electric);
-  border-right-color: rgba(114, 230, 255, 0.7);
-  border-radius: 50%;
-  box-shadow:
-    0 0 35px rgba(76, 174, 205, 0.18),
-    inset 0 0 30px rgba(76, 174, 205, 0.08);
-  animation: loaderOrbit 1.7s linear infinite;
-}
-.page-loader-label {
-  position: relative;
-  font:
-    500 0.68rem 'IBM Plex Mono',
-    monospace;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
-}
-.page-loader-line {
-  position: relative;
-  width: min(220px, 60vw);
-  height: 2px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-}
-.page-loader-line::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, var(--electric), transparent);
-  animation: loaderProgress 1.35s ease-in-out infinite;
-}
-@keyframes loaderOrbit {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes loaderLogo {
-  50% {
-    transform: scale(1.06);
-    filter: drop-shadow(0 0 34px rgba(114, 230, 255, 0.5));
-  }
-}
-@keyframes loaderProgress {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
 /* ---------- VIDEO CTA / TIKTOK WALL ---------- */
 .video-cta {
   min-height: 720px;
@@ -2090,6 +1977,9 @@ header:not(.scrolled) .nav-toggle span {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .reveal-ready {
     opacity: 1;
     transform: none;

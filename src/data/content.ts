@@ -86,7 +86,6 @@ export const doctors: Doctor[] = [
     image: junior,
     hoverImage: juniorSecondary,
   },
-  { name: 'Dra. [Nombre]', role: 'Estética dental', license: 'COP 00000 · RNE 00000' },
 ]
 
 export const locations: Location[] = [

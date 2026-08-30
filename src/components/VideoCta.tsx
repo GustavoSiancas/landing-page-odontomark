@@ -20,7 +20,7 @@ function AdaptiveVideo({ video, profile }: { video: ClinicVideo; profile: Perfor
         setInViewport(entry.isIntersecting)
         if (entry.isIntersecting) setHasLoaded(true)
       },
-      { rootMargin: '180px', threshold: 0.01 },
+      { threshold: 0.01 },
     )
 
     observer.observe(element)
@@ -45,15 +45,20 @@ function AdaptiveVideo({ video, profile }: { video: ClinicVideo; profile: Perfor
   return (
     <video
       ref={elementRef}
-      src={hasLoaded ? source : undefined}
       poster={video.poster}
-      autoPlay
       muted
       loop
       playsInline
       preload="none"
       tabIndex={-1}
-    />
+    >
+      {hasLoaded && (
+        <>
+          <source src={source.webm} type="video/webm" />
+          <source src={source.mp4} type="video/mp4" />
+        </>
+      )}
+    </video>
   )
 }
 

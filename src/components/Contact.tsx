@@ -59,14 +59,18 @@ export function Contact() {
               <div className="ico">💬</div>
               <div>
                 <h4>WhatsApp</h4>
-                <p>+51 902 956 428</p>
+                <p>
+                  <a href="tel:+51902956428">+51 902 956 428</a>
+                </p>
               </div>
             </div>
             <div className="info-item">
               <div className="ico">✉️</div>
               <div>
                 <h4>Correo</h4>
-                <p>contacto@odontomark.pe</p>
+                <p>
+                  <a href="mailto:contacto@odontomark.pe">contacto@odontomark.pe</a>
+                </p>
               </div>
             </div>
           </div>

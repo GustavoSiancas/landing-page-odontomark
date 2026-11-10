@@ -333,6 +333,30 @@ nav ul > li:not(.nav-cta) a:hover::after {
   height: 100%;
   object-fit: cover;
 }
+/* Flotación suave de los marcos, cada uno a su ritmo. Usa `translate`
+   para no pisar el desfase vertical que ya tienen con `transform`. */
+.reel {
+  animation: reelFloat 6s ease-in-out infinite;
+}
+.reel-2 {
+  animation-duration: 7s;
+  animation-delay: -2.5s;
+}
+.reel-3 {
+  animation-duration: 6.5s;
+  animation-delay: -4s;
+}
+@keyframes reelFloat {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -10px;
+    rotate: 0.6deg;
+  }
+}
 @keyframes reelIn {
   from {
     opacity: 0;

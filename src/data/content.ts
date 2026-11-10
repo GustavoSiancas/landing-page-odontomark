@@ -9,66 +9,64 @@ import mariannySecondary from '../assets/photos/doctors/optimized/marianny-2.web
 export const specialties: Specialty[] = [
   {
     id: 1,
-    name: 'Cirugía',
-    icon: '✦',
-    description:
-      'Realizamos procedimientos quirúrgicos orales con evaluación previa, planificación cuidadosa y seguimiento cercano.',
-  },
-  {
-    id: 2,
-    name: 'Cirugía maxilofacial',
-    icon: '◇',
-    description:
-      'Evaluamos y tratamos alteraciones de los maxilares, el rostro y la función oral con un enfoque especializado.',
-  },
-  {
-    id: 3,
-    name: 'Prostodoncia',
-    icon: '⌒',
-    description:
-      'Rehabilitamos dientes ausentes o dañados para recuperar función, comodidad y una apariencia natural.',
-  },
-  {
-    id: 4,
-    name: 'Endodoncia',
-    icon: '⇣',
-    description:
-      'Tratamos el interior del diente para aliviar molestias, controlar infecciones y conservar la pieza dental.',
-  },
-  {
-    id: 5,
-    name: 'Implantología',
-    icon: '╫',
-    description:
-      'Reemplazamos piezas perdidas mediante implantes planificados para recuperar estabilidad, función y una apariencia natural.',
-  },
-  {
-    id: 6,
     name: 'Diseño de sonrisa',
-    icon: '✧',
+    icon: 'smile',
     description:
       'Analizamos forma, color y proporción dental para diseñar una sonrisa armónica y acorde con tus objetivos.',
   },
   {
-    id: 7,
+    id: 2,
     name: 'Ortodoncia',
-    icon: '▦',
+    icon: 'orthodontics',
     description:
-      'Corregimos la posición de los dientes y la mordida mediante alternativas adaptadas a cada paciente.',
+      'Corregimos la posición de los dientes y la mordida con alternativas adaptadas a cada paciente.',
+  },
+  {
+    id: 3,
+    name: 'Implantología',
+    icon: 'implant',
+    description:
+      'Reemplazamos piezas perdidas con implantes planificados para recuperar estabilidad y función.',
+  },
+  {
+    id: 4,
+    name: 'Endodoncia',
+    icon: 'endodontics',
+    description:
+      'Tratamos el interior del diente para aliviar molestias, controlar infecciones y conservar la pieza.',
+  },
+  {
+    id: 5,
+    name: 'Prostodoncia',
+    icon: 'prosthodontics',
+    description:
+      'Rehabilitamos dientes ausentes o dañados para recuperar función, comodidad y apariencia natural.',
+  },
+  {
+    id: 6,
+    name: 'Cirugía oral',
+    icon: 'surgery',
+    description:
+      'Procedimientos quirúrgicos con evaluación previa, planificación cuidadosa y seguimiento cercano.',
+  },
+  {
+    id: 7,
+    name: 'Cirugía maxilofacial',
+    icon: 'maxillofacial',
+    description: 'Evaluamos y tratamos alteraciones de los maxilares, el rostro y la función oral.',
   },
 ]
 
+// Completar `license` cuando se tengan los números de colegiatura (COP / RNE).
 export const doctors: Doctor[] = [
   {
     name: 'Dr. Ronald Siancas',
-    role: 'Diseño de Sonrisa',
-    license: 'COP 00000 · RNE 00000',
+    role: 'Diseño de sonrisa',
     chief: true,
   },
   {
     name: 'Dr. Henry Muller',
     role: 'Ortodoncia y ortopedia maxilar',
-    license: 'COP 00000 · RNE 00000',
     image: henry,
     hoverImage: henrySecondary,
   },
@@ -80,7 +78,7 @@ export const doctors: Doctor[] = [
     hoverImage: mariannySecondary,
   },
   {
-    name: 'Junior Bermejo Quispe',
+    name: 'Dr. Junior Bermejo Quispe',
     role: 'Ortodoncia y ortopedia maxilar',
     license: 'COP 37097',
     image: junior,

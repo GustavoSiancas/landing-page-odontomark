@@ -18,11 +18,17 @@ export function Header() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+  useEffect(() => {
+    if (!open) return
+    const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
   return (
     <header id="site-header" className={`${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
       <div className="wrap">
-        <a href="#top" className="logo">
-          <img src={logo} alt="Odontomark" className="logo-img" width="192" height="192" />
+        <a href="#top" className="logo" onClick={() => setOpen(false)}>
+          <img src={logo} alt="" className="logo-img" width="192" height="192" />
           <span className="logo-text">
             <span className="eyebrow-word">Clínica Dental</span>
             <strong>Odontomark</strong>
@@ -37,6 +43,11 @@ export function Header() {
                 </a>
               </li>
             ))}
+            <li className="nav-cta">
+              <a className="btn" href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+                Agendar cita
+              </a>
+            </li>
           </ul>
         </nav>
         <a

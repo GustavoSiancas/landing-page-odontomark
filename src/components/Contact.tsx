@@ -1,11 +1,20 @@
 import { useState, type FormEvent } from 'react'
 import { specialties } from '../data/content'
-import { whatsappUrl } from '../config/contact'
+import {
+  EMAIL,
+  OPENING_HOURS,
+  PHONE_DISPLAY,
+  WHATSAPP_NUMBER,
+  whatsappUrl,
+} from '../config/contact'
+import { ClockIcon, MailIcon, PinIcon, WhatsAppIcon } from './Icons'
 import cashIcon from '../assets/payments/cash.webp'
 import yapeIcon from '../assets/payments/yape.webp'
 import plinIcon from '../assets/payments/plin.webp'
 import visaIcon from '../assets/payments/visa.webp'
 import transferIcon from '../assets/payments/transfer.webp'
+
+const GENERAL_OPTION = 'Evaluación general'
 
 interface FormState {
   name: string
@@ -13,7 +22,7 @@ interface FormState {
   specialty: string
   message: string
 }
-const initial: FormState = { name: '', phone: '', specialty: specialties[0].name, message: '' }
+const initial: FormState = { name: '', phone: '', specialty: GENERAL_OPTION, message: '' }
 
 const paymentMethods = [
   { name: 'Efectivo', icon: cashIcon },
@@ -23,18 +32,6 @@ const paymentMethods = [
   { name: 'Transferencia', icon: transferIcon },
 ]
 
-function PaymentGroup({ clone = false }: { clone?: boolean }) {
-  return (
-    <div className="payment-group" aria-hidden={clone || undefined}>
-      {paymentMethods.map((method) => (
-        <div className="payment-item" key={`${clone ? 'clone-' : ''}${method.name}`}>
-          <img src={method.icon} alt="" width="180" height="206" loading="lazy" decoding="async" />
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export function Contact() {
   const [form, setForm] = useState(initial)
   const update = (field: keyof FormState, value: string) =>
@@ -42,9 +39,13 @@ export function Contact() {
   const submit = (event: FormEvent) => {
     event.preventDefault()
     const detail = form.message.trim() ? ` ${form.message.trim()}` : ''
+    const interest =
+      form.specialty === GENERAL_OPTION
+        ? 'una evaluación general'
+        : `una cita de ${form.specialty.toLowerCase()}`
     window.open(
       whatsappUrl(
-        `Hola Odontomark, soy ${form.name.trim()} (tel: ${form.phone.trim()}). Me interesa una cita de ${form.specialty}.${detail}`,
+        `Hola Odontomark, soy ${form.name.trim()} (tel: ${form.phone.trim()}). Me interesa ${interest}.${detail}`,
       ),
       '_blank',
       'noopener,noreferrer',
@@ -52,66 +53,73 @@ export function Contact() {
   }
   return (
     <section id="contacto" className="contact">
-      <div className="wrap">
-        <div>
-          <span className="mono contact-kicker">Contacto</span>
+      <div className="wrap contact-grid">
+        <div className="contact-copy">
+          <span className="kicker">Contacto</span>
           <h2>Agenda tu evaluación inicial.</h2>
-          <p className="lead">
+          <p className="contact-lead">
             Escríbenos por WhatsApp o completa el formulario. Respondemos en horario de atención.
           </p>
-          <div className="info-list">
-            <div className="info-item">
-              <div className="ico">📍</div>
+          <ul className="info-list">
+            <li>
+              <span className="ico">
+                <ClockIcon />
+              </span>
               <div>
-                <h4>Sede Villa María del Triunfo</h4>
-                <p>Calle San Eugenio 316, PJ San Gabriel, Lima</p>
+                <strong>Horario</strong>
+                <span>{OPENING_HOURS}</span>
               </div>
-            </div>
-            <div className="info-item">
-              <div className="ico">📍</div>
+            </li>
+            <li>
+              <span className="ico">
+                <WhatsAppIcon />
+              </span>
               <div>
-                <h4>Sede Villa El Salvador</h4>
-                <p>1 De Mayo 510, Villa El Salvador 15828</p>
+                <strong>WhatsApp</strong>
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {PHONE_DISPLAY}
+                </a>
               </div>
-            </div>
-            <div className="info-item">
-              <div className="ico">🕗</div>
+            </li>
+            <li>
+              <span className="ico">
+                <MailIcon />
+              </span>
               <div>
-                <h4>Horario</h4>
-                <p>Lunes a sábado, 9:00 a.m. – 8:00 p.m.</p>
+                <strong>Correo</strong>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
               </div>
-            </div>
-            <div className="info-item">
-              <div className="ico">💬</div>
+            </li>
+            <li>
+              <span className="ico">
+                <PinIcon />
+              </span>
               <div>
-                <h4>WhatsApp</h4>
-                <p>
-                  <a href="tel:+51902956428">+51 902 956 428</a>
-                </p>
+                <strong>Sedes</strong>
+                <a href="#sedes">Villa María del Triunfo y Villa El Salvador</a>
               </div>
-            </div>
-            <div className="info-item">
-              <div className="ico">✉️</div>
-              <div>
-                <h4>Correo</h4>
-                <p>
-                  <a href="mailto:contacto@odontomark.pe">contacto@odontomark.pe</a>
-                </p>
-              </div>
-            </div>
-          </div>
+            </li>
+          </ul>
           <div className="payment-section">
-            <span className="mono payment-label">Medios de pago</span>
-            <div
-              className="payment-marquee"
-              role="img"
-              aria-label="Aceptamos efectivo, Yape, Plin, Visa y transferencia bancaria"
-            >
-              <div className="payment-track">
-                <PaymentGroup />
-                <PaymentGroup clone />
-              </div>
-            </div>
+            <span className="payment-label">Medios de pago</span>
+            <ul className="payment-list">
+              {paymentMethods.map((method) => (
+                <li key={method.name} title={method.name}>
+                  <img
+                    src={method.icon}
+                    alt={method.name}
+                    width="180"
+                    height="206"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className="form-card">
@@ -122,6 +130,7 @@ export function Contact() {
               <label htmlFor="nombre">Nombre completo</label>
               <input
                 id="nombre"
+                autoComplete="name"
                 value={form.name}
                 onChange={(e) => update('name', e.target.value)}
                 required
@@ -148,12 +157,13 @@ export function Contact() {
                 value={form.specialty}
                 onChange={(e) => update('specialty', e.target.value)}
               >
+                <option>{GENERAL_OPTION}</option>
                 {specialties.map((item) => (
                   <option key={item.id}>{item.name}</option>
                 ))}
               </select>
             </div>
-            <div className="form-field form-field-message">
+            <div className="form-field">
               <label htmlFor="mensaje">Mensaje (opcional)</label>
               <textarea
                 id="mensaje"
@@ -163,8 +173,8 @@ export function Contact() {
                 placeholder="Cuéntanos brevemente tu caso"
               />
             </div>
-            <button type="submit" className="btn">
-              Enviar por WhatsApp
+            <button type="submit" className="btn btn-lg btn-block">
+              <WhatsAppIcon /> Enviar por WhatsApp
             </button>
           </form>
         </div>

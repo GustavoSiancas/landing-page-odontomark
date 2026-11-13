@@ -30,13 +30,16 @@ function AdaptiveVideo({ video, profile }: { video: ClinicVideo; profile: Perfor
     if (!element || !hasLoaded) return
     if (inViewport) void element.play().catch(() => undefined)
     else element.pause()
-  }, [hasLoaded, inViewport])
+  }, [hasLoaded, inViewport, profile])
 
   if (profile === 'poster') return <img src={video.poster} alt="" />
 
   const source = profile === 'mobile' ? video.mobile : video.desktop
   return (
     <video
+      // Al cambiar de calidad (móvil ↔ escritorio) se monta un <video> nuevo para que el
+      // navegador cargue las nuevas fuentes; cambiar solo los <source> no las recarga.
+      key={profile}
       ref={elementRef}
       poster={video.poster}
       muted
@@ -62,6 +65,9 @@ const ROTATE_MS = 4500
 /**
  * Muestra 3 videos y va reemplazando uno a la vez por el siguiente de la lista,
  * así recorre todos sin repetir dos iguales en pantalla.
+ *
+ * En el perfil móvil la rotación se detiene después de mostrar cada video una vez,
+ * para no seguir consumiendo datos.
  */
 function HeroReels({ profile }: { profile: PerformanceProfile }) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -69,7 +75,7 @@ function HeroReels({ profile }: { profile: PerformanceProfile }) {
     Array.from({ length: Math.min(SLOT_COUNT, clinicVideos.length) }, (_, i) => i),
   )
   const [visible, setVisible] = useState(false)
-  const tickRef = useRef({ next: slots.length, slot: 0 })
+  const tickRef = useRef({ next: slots.length, slot: 0, count: 0 })
 
   useEffect(() => {
     const element = containerRef.current
@@ -82,8 +88,12 @@ function HeroReels({ profile }: { profile: PerformanceProfile }) {
   const canRotate = visible && profile !== 'poster' && clinicVideos.length > SLOT_COUNT
   useEffect(() => {
     if (!canRotate) return
+    const maxTicks = profile === 'mobile' ? clinicVideos.length - SLOT_COUNT : Infinity
+    if (tickRef.current.count >= maxTicks) return
     const timer = window.setInterval(() => {
       const tick = tickRef.current
+      tick.count += 1
+      if (tick.count >= maxTicks) window.clearInterval(timer)
       const slot = tick.slot
       const videoIndex = tick.next
       tick.slot = (slot + 1) % SLOT_COUNT
@@ -91,7 +101,7 @@ function HeroReels({ profile }: { profile: PerformanceProfile }) {
       setSlots((current) => current.map((value, i) => (i === slot ? videoIndex : value)))
     }, ROTATE_MS)
     return () => window.clearInterval(timer)
-  }, [canRotate])
+  }, [canRotate, profile])
 
   return (
     <div className="hero-reels" aria-hidden="true" ref={containerRef}>

@@ -1,12 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { specialties } from '../data/content'
-import {
-  EMAIL,
-  OPENING_HOURS,
-  PHONE_DISPLAY,
-  WHATSAPP_NUMBER,
-  whatsappUrl,
-} from '../config/contact'
+import { EMAIL, OPENING_HOURS, PHONE_DISPLAY, whatsappUrl } from '../config/contact'
 import { ClockIcon, MailIcon, PinIcon, WhatsAppIcon } from './Icons'
 import cashIcon from '../assets/payments/cash.webp'
 import yapeIcon from '../assets/payments/yape.webp'
@@ -18,11 +12,10 @@ const GENERAL_OPTION = 'Evaluación general'
 
 interface FormState {
   name: string
-  phone: string
   specialty: string
   message: string
 }
-const initial: FormState = { name: '', phone: '', specialty: GENERAL_OPTION, message: '' }
+const initial: FormState = { name: '', specialty: GENERAL_OPTION, message: '' }
 
 const paymentMethods = [
   { name: 'Efectivo', icon: cashIcon },
@@ -44,9 +37,7 @@ export function Contact() {
         ? 'una evaluación general'
         : `una cita de ${form.specialty.toLowerCase()}`
     window.open(
-      whatsappUrl(
-        `Hola Odontomark, soy ${form.name.trim()} (tel: ${form.phone.trim()}). Me interesa ${interest}.${detail}`,
-      ),
+      whatsappUrl(`Hola Odontomark, soy ${form.name.trim()}. Me interesa ${interest}.${detail}`),
       '_blank',
       'noopener,noreferrer',
     )
@@ -76,11 +67,7 @@ export function Contact() {
               </span>
               <div>
                 <strong>WhatsApp</strong>
-                <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
                   {PHONE_DISPLAY}
                 </a>
               </div>
@@ -124,7 +111,7 @@ export function Contact() {
         </div>
         <div className="form-card">
           <h3>Solicita tu cita</h3>
-          <p>Te contactamos para confirmar fecha y hora.</p>
+          <p>Se abrirá WhatsApp con tu mensaje listo para enviar. Te confirmamos fecha y hora.</p>
           <form onSubmit={submit}>
             <div className="form-field">
               <label htmlFor="nombre">Nombre completo</label>
@@ -135,19 +122,6 @@ export function Contact() {
                 onChange={(e) => update('name', e.target.value)}
                 required
                 placeholder="Tu nombre"
-              />
-            </div>
-            <div className="form-field">
-              <label htmlFor="telefono">Teléfono</label>
-              <input
-                id="telefono"
-                type="tel"
-                inputMode="tel"
-                autoComplete="tel"
-                value={form.phone}
-                onChange={(e) => update('phone', e.target.value)}
-                required
-                placeholder="9xx xxx xxx"
               />
             </div>
             <div className="form-field">

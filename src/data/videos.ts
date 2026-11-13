@@ -7,13 +7,13 @@
  *   videos/mobile/video-9.mp4 y .webm
  *   videos/posters/video-9.webp
  * Si falta alguno de los 5, ese video se ignora.
+ *
+ * Para retirar un video de la portada, borra sus archivos de desktop/, mobile/ y posters/
+ * (el original queda en videos/source). Así tampoco se incluye en el build.
  */
 
 /** Videos que se muestran primero, en este orden. El resto sigue en orden numérico. */
 const SHOW_FIRST = ['video-2', 'video-8', 'video-1']
-
-/** Videos que no deben aparecer en la portada. */
-const EXCLUDED = ['video-7']
 
 export interface ClinicVideo {
   name: string
@@ -62,14 +62,7 @@ const rank = (name: string) => {
 }
 
 export const clinicVideos: ClinicVideo[] = Object.keys(posters)
-  .filter(
-    (name) =>
-      !EXCLUDED.includes(name) &&
-      desktopMp4[name] &&
-      desktopWebm[name] &&
-      mobileMp4[name] &&
-      mobileWebm[name],
-  )
+  .filter((name) => desktopMp4[name] && desktopWebm[name] && mobileMp4[name] && mobileWebm[name])
   .sort((a, b) => rank(a) - rank(b))
   .map((name) => ({
     name,

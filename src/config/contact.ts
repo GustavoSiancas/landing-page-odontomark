@@ -1,5 +1,6 @@
 export const WHATSAPP_NUMBER = '51902956428'
 export const PHONE_DISPLAY = '+51 902 956 428'
+export const PHONE_TEL = `tel:+${WHATSAPP_NUMBER}`
 export const EMAIL = 'contacto@odontomark.pe'
 export const OPENING_HOURS = 'Lunes a sábado, 9:00 a.m. – 8:00 p.m.'
 export const GENERAL_MESSAGE =

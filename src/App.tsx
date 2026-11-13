@@ -5,7 +5,7 @@ import { Locations } from './components/Locations'
 import { Specialties } from './components/Specialties'
 import { Team } from './components/Team'
 import { VideoCta } from './components/VideoCta'
-import { EMAIL, OPENING_HOURS, PHONE_DISPLAY, whatsappUrl } from './config/contact'
+import { EMAIL, OPENING_HOURS, PHONE_DISPLAY, PHONE_TEL, whatsappUrl } from './config/contact'
 import { useRevealAnimations } from './hooks/useRevealAnimations'
 import logo from './assets/brand/logo-odontomark.webp'
 
@@ -27,7 +27,7 @@ function Footer() {
           <a href="#contacto">Contacto</a>
         </nav>
         <div className="footer-contact">
-          <a href="tel:+51902956428">{PHONE_DISPLAY}</a>
+          <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
           <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </div>
       </div>

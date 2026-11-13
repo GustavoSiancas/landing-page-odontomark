@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { whatsappUrl } from '../config/contact'
 import logo from '../assets/brand/logo-odontomark.webp'
 
@@ -12,6 +12,7 @@ const links = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     onScroll()
@@ -21,11 +22,22 @@ export function Header() {
   useEffect(() => {
     if (!open) return
     const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setOpen(false)
+    const onPointerDown = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setOpen(false)
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onPointerDown)
+    }
   }, [open])
   return (
-    <header id="site-header" className={`${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}>
+    <header
+      id="site-header"
+      ref={headerRef}
+      className={`${scrolled ? 'scrolled' : ''} ${open ? 'menu-open' : ''}`}
+    >
       <div className="wrap">
         <a href="#top" className="logo" onClick={() => setOpen(false)}>
           <img src={logo} alt="" className="logo-img" width="192" height="192" />

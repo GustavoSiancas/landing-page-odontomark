@@ -3,21 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Dentista en Villa El Salvador y Villa María del Triunfo | Odontomark</title>
     <meta
       name="description"
-      content="Clínica Dental Odontomark: odontología especializada y diseño de sonrisa en Lima, Perú. Atención en Villa María del Triunfo y Villa El Salvador."
+      content="Clínica dental en Lima Sur: diseño de sonrisa, ortodoncia, implantes, endodoncia y más. Sedes en Villa María del Triunfo y Villa El Salvador. Agenda tu cita por WhatsApp."
     />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="theme-color" content="#ffffff" />
+    <link rel="canonical" href="%SITE_URL%/" />
+
     <meta property="og:locale" content="es_PE" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Odontomark — Odontología de precisión" />
+    <meta property="og:site_name" content="Clínica Dental Odontomark" />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:title" content="Odontomark — Clínica dental en Lima Sur" />
     <meta
       property="og:description"
-      content="Odontología especializada y diseño de sonrisa en Lima, Perú. Dos sedes para atenderte."
+      content="Diseño de sonrisa, ortodoncia, implantes y más. Sedes en Villa María del Triunfo y Villa El Salvador. Agenda por WhatsApp."
     />
-    <title>Odontomark — Odontología de precisión</title>
+    <meta property="og:image" content="%SITE_URL%/og-image.jpg" />
+    <meta property="og:image:secure_url" content="%SITE_URL%/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Clínica Dental Odontomark: No imagines el cambio. Hazlo parte de ti."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Odontomark — Clínica dental en Lima Sur" />
+    <meta
+      name="twitter:description"
+      content="Diseño de sonrisa, ortodoncia, implantes y más. Sedes en Villa María del Triunfo y Villa El Salvador."
+    />
+    <meta name="twitter:image" content="%SITE_URL%/og-image.jpg" />
+
     <link rel="icon" type="image/webp" href="/src/assets/brand/logo-odontomark.webp" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,27 +50,51 @@
       {
         "@context": "https://schema.org",
         "@type": "Dentist",
+        "@id": "%SITE_URL%/#clinica",
         "name": "Clínica Dental Odontomark",
-        "description": "Clínica dental especializada en diseño de sonrisa, ortodoncia, implantología y rehabilitación oral.",
+        "url": "%SITE_URL%/",
+        "logo": "%SITE_URL%/apple-touch-icon.png",
+        "image": "%SITE_URL%/og-image.jpg",
+        "description": "Clínica dental especializada en diseño de sonrisa, ortodoncia, implantología, endodoncia, prostodoncia, cirugía oral y cirugía maxilofacial.",
         "telephone": "+51 902 956 428",
         "email": "contacto@odontomark.pe",
-        "areaServed": "Lima, Perú",
-        "openingHours": "Mo-Sa 09:00-20:00",
+        "areaServed": ["Villa María del Triunfo", "Villa El Salvador", "Lima"],
+        "paymentAccepted": "Efectivo, Yape, Plin, Visa, Transferencia",
+        "currenciesAccepted": "PEN",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "20:00"
+        },
         "department": [
           {
             "@type": "Dentist",
             "name": "Odontomark Villa María del Triunfo",
+            "telephone": "+51 902 956 428",
+            "image": "%SITE_URL%/og-image.jpg",
+            "hasMap": "https://maps.app.goo.gl/Jx5xMWDaUXQjvCL38",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Calle San Eugenio 316, PJ San Gabriel",
               "addressLocality": "Villa María del Triunfo",
               "addressRegion": "Lima",
               "addressCountry": "PE"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -12.155979, "longitude": -76.95637 },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "09:00",
+              "closes": "20:00"
             }
           },
           {
             "@type": "Dentist",
             "name": "Odontomark Villa El Salvador",
+            "telephone": "+51 902 956 428",
+            "image": "%SITE_URL%/og-image.jpg",
+            "hasMap": "https://maps.app.goo.gl/1U9PZf1QmLU6Kiyx7",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "1 De Mayo 510",
@@ -56,6 +102,13 @@
               "addressRegion": "Lima",
               "postalCode": "15828",
               "addressCountry": "PE"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": -12.1908227, "longitude": -76.9455906 },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "09:00",
+              "closes": "20:00"
             }
           }
         ]

@@ -135,7 +135,9 @@ export function VideoCta() {
             Clínica dental · Villa María del Triunfo y Villa El Salvador
           </span>
           <h1 id="hero-title">
-            No imagines el cambio. <em>Hazlo parte de ti.</em>
+            No imagines el cambio.
+            <br />
+            <em>Hazlo parte de ti.</em>
           </h1>
           <p className="hero-lead">
             Diseño de sonrisa, ortodoncia, implantes y más, con especialistas que te acompañan en

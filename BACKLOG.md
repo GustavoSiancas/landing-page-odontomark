@@ -30,7 +30,9 @@ material que todavía no tenemos.
       al tocarlo (cada iframe pesa ~1 MB).
 - [ ] **Fuentes propias:** alojar Fraunces y Work Sans en el proyecto (por ejemplo `@fontsource`) en
       lugar de Google Fonts, y precargar solo los pesos usados.
-- [ ] 🧾 Sección de preguntas frecuentes (precios referenciales, duración de tratamientos, formas de pago).
+- [x] Sección de preguntas frecuentes con datos confirmados (`faqs` en `src/data/content.ts`).
+- [ ] 🧾 Ampliar las preguntas frecuentes: precio de la evaluación, duración de la ortodoncia,
+      financiamiento y urgencias.
 - [ ] Aviso breve de privacidad (Ley 29733) junto al formulario.
 
 ## Prioridad baja / mantenimiento

@@ -1,0 +1,57 @@
+# Servidor de producción en Railway.
+#
+# Railpack usa este archivo en lugar de su Caddyfile por defecto (es una plantilla: Railpack
+# reemplaza {{.DIST_DIR}} por la carpeta del build). Diferencias con el de Railpack:
+#   - Sin "fallback" a index.html: una URL que no existe responde 404 con dist/404.html, en vez de
+#     cargar la portada con código 200 (Google lo trataba como "soft 404").
+#   - Caché larga para /assets/*, que Vite genera con un hash en el nombre.
+
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	log {
+		format json
+	}
+
+	servers {
+		trusted_proxies static private_ranges 100.0.0.0/8 # proxy de Railway
+	}
+}
+
+:{$PORT:80} {
+	log {
+		format json
+	}
+
+	respond /health 200
+
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	# Los archivos de /assets llevan un hash en el nombre: si cambian, cambia la URL.
+	header /assets/* Cache-Control "public, max-age=31536000, immutable"
+
+	root * {{.DIST_DIR}}
+
+	encode {
+		gzip
+		zstd
+	}
+
+	try_files {path} {path}.html {path}/index.html
+
+	file_server {
+		hide .git
+		hide .env*
+	}
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}

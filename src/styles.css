@@ -707,6 +707,105 @@ section {
   font-size: 0.78rem;
 }
 
+/* ---------- PREGUNTAS FRECUENTES ---------- */
+.faq {
+  background: var(--white);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+}
+.faq-grid .section-head {
+  margin-bottom: 0;
+}
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.faq-item[open] {
+  border-color: var(--blue-100);
+  box-shadow: var(--shadow);
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  color: var(--navy);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::after {
+  content: '+';
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease-out);
+}
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq-item summary:focus-visible {
+  border-radius: 16px;
+}
+.faq-item p {
+  padding: 0 22px 20px;
+  color: var(--muted);
+}
+
+/* ---------- PÁGINA 404 (dist/404.html, generada en scripts/prerender.mjs) ---------- */
+.not-found {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 48px 0;
+  background: linear-gradient(180deg, var(--white), var(--blue-50));
+  text-align: center;
+}
+.not-found .wrap {
+  max-width: 640px;
+}
+.not-found-logo {
+  display: inline-block;
+  margin-bottom: 28px;
+}
+.not-found h1 {
+  margin-top: 14px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-wrap: balance;
+}
+.not-found p {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.not-found .hero-actions {
+  justify-content: center;
+}
+
 /* ---------- CONTACTO ---------- */
 .contact {
   background: linear-gradient(140deg, var(--blue-700), var(--blue-600) 60%, #1b7aa8);
@@ -1069,6 +1168,9 @@ footer {
 }
 
 @media (max-width: 900px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
   nav ul {
     display: none;
   }

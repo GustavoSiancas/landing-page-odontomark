@@ -10,6 +10,7 @@ const REVEAL_SELECTOR = [
   '.specialty-card',
   '.sede-card',
   '.doc-card',
+  '.faq-item',
   '.contact-copy > :not(.info-list):not(.payment-section)',
   '.info-list li',
   '.payment-label',

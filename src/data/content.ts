@@ -1,4 +1,5 @@
-import type { Doctor, Location, Specialty } from '../types'
+import type { Doctor, Faq, Location, Specialty } from '../types'
+import { OPENING_HOURS, PHONE_DISPLAY } from '../config/contact'
 import henry from '../assets/photos/doctors/optimized/henry.webp'
 import henrySecondary from '../assets/photos/doctors/optimized/henry-2.webp'
 import junior from '../assets/photos/doctors/optimized/junior.webp'
@@ -100,5 +101,43 @@ export const locations: Location[] = [
     address: '1 De Mayo 510, Villa El Salvador 15828, Lima.',
     mapUrl: 'https://www.google.com/maps?q=-12.1908227,-76.9455906&z=17&output=embed',
     directionsUrl: 'https://maps.app.goo.gl/1U9PZf1QmLU6Kiyx7',
+  },
+]
+
+/**
+ * Preguntas frecuentes. Solo incluir respuestas confirmadas por la clínica: se muestran en la web
+ * y se publican como datos estructurados (FAQPage) para Google.
+ *
+ * Pendientes cuando haya datos: precio de la evaluación, duración aproximada de la ortodoncia,
+ * opciones de financiamiento y atención de urgencias.
+ */
+export const faqs: Faq[] = [
+  {
+    question: '¿Cómo agendo una cita?',
+    answer: `Escríbenos por WhatsApp al ${PHONE_DISPLAY} o completa el formulario de esta página. Te respondemos en horario de atención y te confirmamos la fecha y la hora.`,
+  },
+  {
+    question: '¿Cuál es el horario de atención?',
+    answer: `${OPENING_HOURS}, en nuestras dos sedes.`,
+  },
+  {
+    question: '¿Dónde están ubicadas las sedes?',
+    answer: `Tenemos dos sedes en Lima Sur: ${locations.map((l) => `${l.name}, en ${l.address.split(',')[0]}`).join(', y ')}.`,
+  },
+  {
+    question: '¿Qué tratamientos realizan?',
+    answer: `${specialties
+      .map((s, i) => (i === 0 ? s.name : s.name.toLowerCase()))
+      .join(', ')
+      .replace(/, ([^,]+)$/, ' y $1')}. Todas las especialidades están disponibles en ambas sedes.`,
+  },
+  {
+    question: 'No sé qué tratamiento necesito, ¿qué hago?',
+    answer:
+      'Agenda una evaluación inicial. El especialista revisa tu caso, te explica las alternativas y te orienta sobre el tratamiento adecuado antes de empezar.',
+  },
+  {
+    question: '¿Qué medios de pago aceptan?',
+    answer: 'Aceptamos efectivo, Yape, Plin, tarjeta Visa y transferencia bancaria.',
   },
 ]

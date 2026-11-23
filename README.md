@@ -22,6 +22,9 @@ SITE_URL=https://www.otro-dominio.pe npm run build
 - `public/og-image.jpg` (1200×630): vista previa al compartir el enlace por WhatsApp o redes.
 - `public/apple-touch-icon.png`: ícono al guardar la web en la pantalla de inicio del celular.
 - `robots.txt` y `sitemap.xml` se generan automáticamente en el build.
+- `dist/404.html` se genera en `scripts/prerender.mjs`. El `Caddyfile` de la raíz reemplaza al de
+  Railpack en Railway: responde 404 con esa página para las URLs que no existen (en vez de cargar la
+  portada) y cachea `/assets/*` por un año.
 
 ## Recursos multimedia
 

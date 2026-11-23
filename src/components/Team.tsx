@@ -19,6 +19,8 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
               className="photo-primary"
               src={doctor.image}
               alt={doctor.name}
+              width="600"
+              height="796"
               loading="lazy"
               decoding="async"
             />
@@ -27,6 +29,8 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
                 className="photo-secondary"
                 src={doctor.hoverImage}
                 alt=""
+                width="600"
+                height="796"
                 loading="lazy"
                 decoding="async"
               />

@@ -1,4 +1,5 @@
 import { Contact } from './components/Contact'
+import { Faq } from './components/Faq'
 import { Header } from './components/Header'
 import { WhatsAppIcon } from './components/Icons'
 import { Locations } from './components/Locations'
@@ -24,6 +25,7 @@ function Footer() {
           <a href="#especialidades">Especialidades</a>
           <a href="#sedes">Sedes</a>
           <a href="#equipo">Equipo</a>
+          <a href="#preguntas">Preguntas frecuentes</a>
           <a href="#contacto">Contacto</a>
         </nav>
         <div className="footer-contact">
@@ -53,6 +55,7 @@ export default function App() {
         <Specialties />
         <Locations />
         <Team />
+        <Faq />
         <Contact />
       </main>
       <Footer />

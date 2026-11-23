@@ -33,7 +33,10 @@ function Footer() {
       </div>
       <div className="wrap">
         <div className="footer-bottom">
-          © {new Date().getFullYear()} Clínica Dental Odontomark. Todos los derechos reservados.
+          <span>
+            © {new Date().getFullYear()} Clínica Dental Odontomark. Todos los derechos reservados.
+          </span>
+          <span className="footer-version">v{__APP_VERSION__}</span>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+import pkg from './package.json' with { type: 'json' }
 
 /** Dominio público por defecto. Se puede cambiar con la variable de entorno SITE_URL. */
 const DEFAULT_SITE_URL = 'https://odontomark.pe'
@@ -37,5 +38,11 @@ function siteUrl(url: string): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '')
   const url = (env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '')
-  return { plugins: [react(), siteUrl(url)], build: { manifest: true } }
+  // Versión visible en el footer: "1.0.0" en package.json se muestra como "1.0".
+  const appVersion = pkg.version.split('.').slice(0, 2).join('.')
+  return {
+    plugins: [react(), siteUrl(url)],
+    define: { __APP_VERSION__: JSON.stringify(appVersion) },
+    build: { manifest: true },
+  }
 })

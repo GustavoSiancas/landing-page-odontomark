@@ -930,8 +930,17 @@ footer {
   margin-top: 28px;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.6);
+}
+.footer-version {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.45);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- WHATSAPP FLOTANTE ---------- */

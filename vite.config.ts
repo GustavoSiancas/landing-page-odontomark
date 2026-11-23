@@ -37,5 +37,5 @@ function siteUrl(url: string): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '')
   const url = (env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, '')
-  return { plugins: [react(), siteUrl(url)] }
+  return { plugins: [react(), siteUrl(url)], build: { manifest: true } }
 })

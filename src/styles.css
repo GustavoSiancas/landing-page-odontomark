@@ -283,6 +283,14 @@ nav ul > li:not(.nav-cta) a:hover::after {
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
+.hero-tagline {
+  margin-top: 12px;
+  color: var(--blue-600);
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-style: italic;
+  font-weight: 600;
+}
 .hero h1 em {
   font-style: italic;
   font-weight: 500;

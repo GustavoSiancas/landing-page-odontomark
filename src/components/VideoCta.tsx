@@ -7,7 +7,8 @@ import { ArrowIcon, WhatsAppIcon } from './Icons'
 
 function AdaptiveVideo({ video, profile }: { video: ClinicVideo; profile: PerformanceProfile }) {
   const elementRef = useRef<HTMLVideoElement>(null)
-  const supportsIntersectionObserver = 'IntersectionObserver' in window
+  const supportsIntersectionObserver =
+    typeof window !== 'undefined' && 'IntersectionObserver' in window
   const [inViewport, setInViewport] = useState(!supportsIntersectionObserver)
   const [hasLoaded, setHasLoaded] = useState(!supportsIntersectionObserver)
 
@@ -134,11 +135,8 @@ export function VideoCta() {
           <span className="eyebrow">
             Clínica dental · Villa María del Triunfo y Villa El Salvador
           </span>
-          <h1 id="hero-title">
-            No imagines el cambio.
-            <br />
-            <em>Hazlo parte de ti.</em>
-          </h1>
+          <h1 id="hero-title">Clínica dental en Villa María del Triunfo y Villa El Salvador</h1>
+          <p className="hero-tagline">No imagines el cambio. Hazlo parte de ti.</p>
           <p className="hero-lead">
             Diseño de sonrisa, ortodoncia, implantes y más, con especialistas que te acompañan en
             cada etapa del tratamiento.

@@ -35,7 +35,8 @@ function detectPerformanceProfile(): PerformanceProfile {
 }
 
 export function usePerformanceProfile() {
-  const [profile, setProfile] = useState<PerformanceProfile>(detectPerformanceProfile)
+  // Keep server rendering and the browser's first render identical for hydration.
+  const [profile, setProfile] = useState<PerformanceProfile>('poster')
 
   useEffect(() => {
     const browser = navigator as NavigatorWithPerformanceHints
